@@ -112,5 +112,6 @@ async def procesar_formulario(
     with open(ruta_archivo, 'a') as archivo:
         archivo.write(datos_guardar + "\n\n")
 
-    return "Datos guardados correctamente"
+    return templates.TemplateResponse('exito.html' , {"request": request})
+
 
