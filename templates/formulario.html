@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Contraloría</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .form-section {
+        display:none;
+      }
+      .form-section.active{
+        display: block;
+      }
+    </style>
+</head>
+<body>
+   <!--<div class="container">-->
+    <form method="post" action="/data-processing" class="row g-3 mx-md-5 mx-2">
+      <div id = "section1" class="form-section active">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <div style="text-align: center;">
+              <img class="imagen-izquierda" src="SAVE_20250303_195208-removebg-preview.png">
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">FORMULARIO CONTRALORÍA</h1>
+              <img class="imagen-derecha" src="SAVE_20250303_195208-removebg-preview.png">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="nombre" class="form-label">Nombre y apellido </label>
+            <input name="nombre" type="text" class="form-control" id="nombre" required />
+          </div>
+          <div class="col-md-4">
+            <label for="correo" class="form-label">Dirección de correo electrónico </label>
+            <input name="correo" type="text" class="form-control" id="correo" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cargo" class="form-label">Cargo </label>
+            <input name="cargo" type="text" class="form-control" id="cargo" aria-describedby="inputGroupPrepend2" required/>
+          </div>
+        </div>
+        <!--</div>-->
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <label for="numero_cedula" class="form-label">Número de Cédula </label>
+            <input name="numero_cedula" type="text" class="form-control" id="numero_cedula" required />
+          </div>
+          <div class="col-md-4">
+            <label for="nombre_jefe" class="form-label">Nombre del jefe o jefa de la Oficiona de Atención al Ciudadano </label>
+            <input name="nombre_jefe" type="text" class="form-control" id="nombre_jefe" required />
+          </div>
+          <div class="col-md-4">
+            <label for="numero_telefono_jefe" class="form-label">Número de teléfono del jefe o jefa de la Oficina de Atención al Ciudadano </label>
+            <input name="numero_telefono_jefe" type="text" class="form-control" id="numero_telefono_jefe" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="estado" class="form-label">Estado </label>
+            <select name="estado" class="form-select" id="estado" required>
+              <option selected disabled value="">Seleccione su estado...</option>
+              <option value="Miranda">Miranda</option>
+            </select>
+          </div>
+          <!--</div>-->
+          <div class="col-md-4">
+            <label for="municipio" class="form-label">Municipio </label>
+            <input name="municipio" type="text" class="form-control" id="municipio" required />
+          </div>
+          <div class="col-md-4">
+            <label for="nombre_organismo" class="form-label">Nombre del Organismo u Ente adscrito donde labora </label>
+            <input name="nombre_organismo" type="text" class="form-control" id="nombre_organismo" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="instancia" class="form-label">Instancia a la que pertenece </label>
+            <input name="instancia" type="text" class="form-control" id="instancia" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_denuncias" class="form-label">Cantidad de denuncias recibidas </label>
+            <input name="cantidad_denuncias" type="text" class="form-control" id="cantidad_denuncias" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_reclamos" class="form-label">Cantidad de reclamos recibidos </label>
+            <input name="cantidad_reclamos" type="text" class="form-control" id="cantidad_reclamos" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_quejas" class="form-label">Cantidad de quejas recibidas </label>
+            <input name="cantidad_quejas" type="text" class="form-control" id="cantidad_quejas" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_peticiones" class="form-label">Cantidad de peticiones recibidas </label>
+            <input name="cantidad_peticiones" type="text" class="form-control" id="cantidad_peticiones" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_sugerencias" class="form-label">Cantidad de sugerencias recibidas </label>
+            <input name="cantidad_sugerencias" type="text" class="form-control" id="cantidad_sugerencias" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_asesorias" class="form-label">Cantidad de asesorías recibidas </label>
+            <input name="cantidad_asesorias" type="text" class="form-control" id="cantidad_asesorias" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_poblacion_masc" class="form-label">Cantidad de población adulto masculino </label>
+            <input name="cantidad_poblacion_masc" type="text" class="form-control" id="cantidad_poblacion_masc" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_poblacion_fem" class="form-label">Cantidad de población adulto femenina </label>
+            <input name="cantidad_poblacion_fem" type="text" class="form-control" id="cantidad_poblacion_fem" required />
+          </div>
+        </div>
+        <br>
+        <div class = "col-12">
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(2)">Siguiente</button>
+        </div>
+      </div>
+      <div id = "section2" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <img class="imagen-izquierda" src="SAVE_20250303_195208-removebg-preview.png">
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">ACTIVIDADES PARA LAS OIPP</h1>
+            <img class="imagen-derecha" src="SAVE_20250303_195208-removebg-preview.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_talleres_oipp" class="form-label">Cantidad de talleres realizados (OIPP)</label>
+            <input name="cantidad_talleres_oipp" type="text" class="form-control" id="cantidad_talleres_oipp" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_charlas_oipp" class="form-label">Cantidad de charlas realizadas (OIPP)</label>
+            <input name="cantidad_charlas_oipp" type="text" class="form-control" id="cantidad_charlas_oipp" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_conversatorios_oipp" class="form-label">Cantidad de conversatorios realizados (OIPP)</label>
+            <input name="cantidad_conversatorios_oipp" type="text" class="form-control" id="cantidad_conversatorios_oipp" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_jornadas_oipp" class="form-label">Cantidad de jornadas realizadas (OIPP)</label>
+            <input name="cantidad_jornadas_oipp" type="text" class="form-control" id="cantidad_jornadas_oipp" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_forochats_oipp" class="form-label">Cantidad de foro-chats realizados (OIPP)</label>
+            <input name="cantidad_forochats_oipp" type="text" class="form-control" id="cantidad_forochats_oipp" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_adulto_masculino_atentido_oipp" class="form-label">Cantidad de población adulto masculino atendido (OIPP)</label>
+            <input name="cantidad_adulto_masculino_atentido_oipp" type="text" class="form-control" id="cantidad_adulto_masculino_atentido_oipp" required />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="cantidad_adulto_femenino_atentida_oipp" class="form-label">Cantidad de población adulto femenino atendido (OIPP)</label>
+          <input name="cantidad_adulto_femenino_atentida_oipp" type="text" class="form-control" id="cantidad_adulto_femenino_atentida_oipp" required />
+        </div>
+        <br>
+        <div class = "col-12">
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(1)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(3)">Siguiente</button>
+        </div>
+      </div>
+      <div id = "section3" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <img class="imagen-izquierda" src="SAVE_20250303_195208-removebg-preview.png">
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">ACTIVIDADES SISTEMA EDUCATIVO</h1>
+            <img class="imagen-derecha" src="SAVE_20250303_195208-removebg-preview.png">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="nombre_escuela_se" class="form-label">Nombre de la Escuela,Liceo o Universidad donde realizó la actividad (S.E.)</label>
+            <input name="nombre_escuela_se" type="text" class="form-control" id="nombre_escuela_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_actividades_se" class="form-label">Describa cantidad y de que trataron las actividades relizadas al Sistema Educativo (S.E.)</label>
+            <input name="cantidad_actividades_se" type="text" class="form-control" id="cantidad_actividades_se" required />
+          </div>
+          <div class="col-md-4">
+            <br>
+            <label for="cantidad_talleres_se" class="form-label">Cantidad de talleres realizados (S.E.)</label>
+            <input name="cantidad_talleres_se" type="text" class="form-control" id="cantidad_talleres_se" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_charlas_se" class="form-label">Cantidad de charlas realizadas (S.E.)</label>
+            <input name="cantidad_charlas_se" type="text" class="form-control" id="cantidad_charlas_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_conversatorios_se" class="form-label">Cantidad de conversatorios realizados (S.E.)</label>
+            <input name="cantidad_conversatorios_se" type="text" class="form-control" id="cantidad_conversatorios_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_jornadas_se" class="form-label">Cantidad de jornadas realizadas (S.E.)</label>
+            <input name="cantidad_jornadas_se" type="text" class="form-control" id="cantidad_jornadas_se" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <label for="cantidad_forochats_se" class="form-label">Cantidad de foro chats realizados (S.E.)</label>
+            <input name="cantidad_forochats_se" type="text" class="form-control" id="cantidad_forochats_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_ninosyadol_masculino_se" class="form-label">Cantidad de niños y adolescentes masculinos atendidos (S.E.)</label>
+            <input name="cantidad_ninosyadol_masculino_se" type="text" class="form-control" id="cantidad_ninosyadol_masculino_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_ninasyadol_femenino_se" class="form-label">Cantidad de niñas y adolescentes femeninas atendidos (S.E.)</label>
+            <input name="cantidad_ninasyadol_femenino_se" type="text" class="form-control" id="cantidad_ninasyadol_femenino_se" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="cantidad_adultos_masculino_atendidos_se" class="form-label">Cantidad de adultos masculinos atendidos (S.E.)</label>
+            <input name="cantidad_adultos_masculino_atendidos_se" type="text" class="form-control" id="cantidad_adultos_masculino_atendidos_se" required />
+          </div>
+          <div class="col-md-4">
+            <label for="cantidad_adultos_femenino_atendidos_se" class="form-label">Cantidad de adultas femeninas atendidos (S.E.)</label>
+            <input name="cantidad_adultos_femenino_atendidos_se" type="text" class="form-control" id="cantidad_adultos_femenino_atendidos_se" required />
+          </div>
+        </div>
+        <br>
+        <div class = "col-12">
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(2)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(4)">Siguiente</button>
+        </div>
+      </div>
+      <div id="section4" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <div style="text-align: center;">
+              <img class="imagen-izquierdasec4" src="SAVE_20250303_195208-removebg-preview.png">
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="col">ACTIVIDADES PARA LA ADMINISTRACIÓN PÚBLICA</h1>
+              <img class="imagen-derechasec4" src="SAVE_20250303_195208-removebg-preview.png">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+              <label for="nombre_ministerio_ap" class="form-label">Nombre del Ministerio, Empresa, Compañia u Ente a quien le dió la actividad competente a la Administración Pública Nacional (A.P.)</label>
+              <input name="nombre_ministerio_ap" type="text" class="form-control" id="nombre_ministerio_ap" required />
+          </div>
+          <div class="col-md-4">
+              <br>
+              <label for="cantidad_actividades_ap" class="form-label">Describa cantidad y de que trataron las actividades realizadas a la Administración Pública (A.P.)</label>
+              <input name="cantidad_actividades_ap" type="text" class="form-control" id="cantidad_actividades_ap" required />
+          </div>
+          <div class="col-md-4">
+              <br>
+              <br>
+              <label for="cantidad_talleres_ap" class="form-label">Cantidad de talleres realizados (A.P.)</label>
+              <input name="cantidad_talleres_ap" type="text" class="form-control" id="cantidad_talleres_ap" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+              <label for="cantidad_charlas_ap" class="form-label">Cantidad de charlas realizadas (A.P.)</label>
+              <input name="cantidad_charlas_ap" type="text" class="form-control" id="cantidad_charlas_ap" required />
+          </div>
+          <div class="col-md-4">
+              <label for="cantidad_jornadas_ap" class="form-label">Cantidad de jornadas realizadas (A.P.)</label>
+              <input name="cantidad_jornadas_ap" type="text" class="form-control" id="cantidad_jornadas_ap" required />
+          </div>
+          <div class="col-md-4">
+              <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats realizados (A.P.)</label>
+              <input name="cantidad_forochats_ap" type="text" class="form-control" id="cantidad_forochats_ap" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+              <label for="cantidad_funcionarios_masculino_ap" class="form-label">Cantidad de funcionarios masculinos atendidos en la Administración Pública Nacional </label>
+              <input name="cantidad_funcionarios_masculino_ap" type="text" class="form-control" id="cantidad_funcionarios_masculino_ap" required />
+          </div>
+          <div class="col-md-4">
+              <label for="cantidad_funcionarios_femenino_ap" class="form-label">Cantidad de funcionarias femeninas atendidas en la Administración Pública Nacional </label>
+              <input name="cantidad_funcionarios_femenino_ap" type="text" class="form-control" id="cantidad_funcionarios_femenino_ap" required />
+          </div>
+        </div>
+        <br>
+        <div class="col-12">
+            <button type = "button" class = "btn btn-secondary" onclick="nextsection(3)">Anterior</button>
+            <button class="btn btn-primary" type="submit">Enviar Información</button>
+        </div>
+      </div>
+    </form>
+   <!--</div>-->
+  <script>
+    function nextsection(sectionNumber) {
+      document.querySelectorAll('.form-section').forEach(section => {
+          section.classList.remove('active');
+      });
+      document.getElementById(`section${sectionNumber}`).classList.add('active');
+    }
+  </script>
+  <style>
+    .titulo-con-imagen {
+      background-color: rgb(66, 49, 223);
+      color: white;
+      padding: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative; /* Importante para posicionar la imagen */
+    }
+
+    .titulo-con-imagen img {
+      max-height: 90px;
+      position: absolute; /* Posiciona la imagen encima */
+      top: 59%; /* Centra verticalmente la imagen */
+      transform: translateY(-50%); /* Ajusta el centrado vertical */
+      
+      z-index: 1; /* Asegura que la imagen esté encima de la franja */
+    }
+    
+    .titulo-con-imagen h1 {
+      position: relative; /* Para asegurar que el texto no quede detras de la imagen */
+      z-index: 2; /* Para asegurar que el texto este encima de la imagen */
+    }
+    .imagen-izquierda {
+      left: 10px;
+    }
+
+    .imagen-derecha {
+      right: 10px;
+    }
+    .imagen-izquierdasec4 {
+      left: -16px;
+    }
+
+    .imagen-derechasec4 {
+      right: -16px;
+    }
+  </style>
+
+</body>
+</html>
