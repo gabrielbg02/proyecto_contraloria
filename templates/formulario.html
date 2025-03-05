@@ -23,10 +23,12 @@
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
               <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
-              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">FORMULARIO CONTRALORÍA</h1>
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
               <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
             </div>
           </div>
+          <h4 style="text-align: center;">Datos personales</h4>
+          <h7 style="text-align: center;">jefe o jefa de la Oficina de Atencion al Ciudadano</h7>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -45,18 +47,29 @@
         <!--</div>-->
         <div class="row">
           <div class="col-md-4">
-            <br>
             <label for="numero_cedula" class="form-label">Número de Cédula </label>
             <input name="numero_cedula" type="text" class="form-control" id="numero_cedula" required />
           </div>
           <div class="col-md-4">
-            <label for="nombre_jefe" class="form-label">Nombre del jefe o jefa de la Oficiona de Atención al Ciudadano </label>
-            <input name="nombre_jefe" type="text" class="form-control" id="nombre_jefe" required />
-          </div>
-          <div class="col-md-4">
-            <label for="numero_telefono_jefe" class="form-label">Número de teléfono del jefe o jefa de la Oficina de Atención al Ciudadano </label>
+            <label for="numero_telefono_jefe" class="form-label">Número de teléfono </label>
             <input name="numero_telefono_jefe" type="text" class="form-control" id="numero_telefono_jefe" required />
           </div>
+        </div>
+        <br>
+        <div class = "col-12">
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(2)">Siguiente</button>
+        </div>
+      </div>
+      <div id="section2" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <div style="text-align: center;">
+              <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
+              <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            </div>
+          </div>
+          <h4 style="text-align: center;">Información Organismo u Ente</h4>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -66,7 +79,6 @@
               <option value="Miranda">Miranda</option>
             </select>
           </div>
-          <!--</div>-->
           <div class="col-md-4">
             <label for="municipio" class="form-label">Municipio </label>
             <input name="municipio" type="text" class="form-control" id="municipio" required />
@@ -81,6 +93,25 @@
             <label for="instancia" class="form-label">Instancia a la que pertenece </label>
             <input name="instancia" type="text" class="form-control" id="instancia" required />
           </div>
+        </div>
+        <br>
+        <div class="col-12">
+          <button type="button" class="btn btn-secondary" onclick="nextsection(1)">Anterior</button>
+          <button type="button" class="btn btn-primary" onclick="nextsection(3)">Siguiente</button>
+        </div>
+      </div>
+      <div id = "section3" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <div style="text-align: center;">
+              <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
+              <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            </div>
+          </div>
+          <h4 style="text-align: center;">Actividades de la Oficina</h4>
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <label for="cantidad_denuncias" class="form-label">Cantidad de denuncias recibidas </label>
             <input name="cantidad_denuncias" type="text" class="form-control" id="cantidad_denuncias" required />
@@ -89,12 +120,12 @@
             <label for="cantidad_reclamos" class="form-label">Cantidad de reclamos recibidos </label>
             <input name="cantidad_reclamos" type="text" class="form-control" id="cantidad_reclamos" required />
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-4">
             <label for="cantidad_quejas" class="form-label">Cantidad de quejas recibidas </label>
             <input name="cantidad_quejas" type="text" class="form-control" id="cantidad_quejas" required />
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <label for="cantidad_peticiones" class="form-label">Cantidad de peticiones recibidas </label>
             <input name="cantidad_peticiones" type="text" class="form-control" id="cantidad_peticiones" required />
@@ -103,12 +134,12 @@
             <label for="cantidad_sugerencias" class="form-label">Cantidad de sugerencias recibidas </label>
             <input name="cantidad_sugerencias" type="text" class="form-control" id="cantidad_sugerencias" required />
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-4">
             <label for="cantidad_asesorias" class="form-label">Cantidad de asesorías recibidas </label>
             <input name="cantidad_asesorias" type="text" class="form-control" id="cantidad_asesorias" required />
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <label for="cantidad_poblacion_masc" class="form-label">Cantidad de población adulto masculino </label>
             <input name="cantidad_poblacion_masc" type="text" class="form-control" id="cantidad_poblacion_masc" required />
@@ -120,16 +151,18 @@
         </div>
         <br>
         <div class = "col-12">
-          <button type = "button" class = "btn btn-primary" onclick="nextsection(2)">Siguiente</button>
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(2)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(4)">Siguiente</button>
         </div>
       </div>
-      <div id = "section2" class="form-section">
+      <div id = "section4" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
-            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">ACTIVIDADES PARA LAS OIPP</h1>
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
             <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
           </div>
+          <h4 style="text-align: center;">Actividades para la OIPP</h4>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -165,17 +198,18 @@
         </div>
         <br>
         <div class = "col-12">
-          <button type = "button" class = "btn btn-secondary" onclick="nextsection(1)">Anterior</button>
-          <button type = "button" class = "btn btn-primary" onclick="nextsection(3)">Siguiente</button>
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(3)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(5)">Siguiente</button>
         </div>
       </div>
-      <div id = "section3" class="form-section">
+      <div id = "section5" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
-            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">ACTIVIDADES SISTEMA EDUCATIVO</h1>
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
             <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
           </div>
+          <h4 style="text-align: center;">Actividades Sistema Educativo</h4>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -206,6 +240,21 @@
             <input name="cantidad_jornadas_se" type="text" class="form-control" id="cantidad_jornadas_se" required />
           </div>
         </div>
+        <br>
+        <div class = "col-12">
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(4)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(6)">Siguiente</button>
+        </div>
+      </div>
+      <div id = "section6" class="form-section">
+        <div class="row m-md-5 m-3">
+          <div class="titulo-con-imagen">
+            <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
+            <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+          </div>
+          <h4 style="text-align: center;">Actividades Sistema Educativo</h4>
+        </div>
         <div class="row">
           <div class="col-md-4">
             <br>
@@ -233,19 +282,20 @@
         </div>
         <br>
         <div class = "col-12">
-          <button type = "button" class = "btn btn-secondary" onclick="nextsection(2)">Anterior</button>
-          <button type = "button" class = "btn btn-primary" onclick="nextsection(4)">Siguiente</button>
+          <button type = "button" class = "btn btn-secondary" onclick="nextsection(5)">Anterior</button>
+          <button type = "button" class = "btn btn-primary" onclick="nextsection(7)">Siguiente</button>
         </div>
       </div>
-      <div id="section4" class="form-section">
+      <div id="section7" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
               <img class="imagen-izquierdasec4" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
-              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="col">ACTIVIDADES PARA LA ADMINISTRACIÓN PÚBLICA</h1>
+              <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
               <img class="imagen-derechasec4" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
             </div>
           </div>
+          <h4 style="text-align: center;">Actividades para la Administración Publica</h4>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -290,7 +340,7 @@
         </div>
         <br>
         <div class="col-12">
-            <button type = "button" class = "btn btn-secondary" onclick="nextsection(3)">Anterior</button>
+            <button type = "button" class = "btn btn-secondary" onclick="nextsection(7)">Anterior</button>
             <button class="btn btn-primary" type="button" onclick="validarYEnviar()">Enviar Información</button>
         </div>
       </div>
