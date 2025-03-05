@@ -1,11 +1,12 @@
 from fastapi import FastAPI, Request, Form, staticfiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 import os
 
 app = FastAPI()
-app.mount("/static", staticfiles.StaticFiles(directory="static"), name="static") # Agrega esta línea
-templates = Jinja2Templates(directory="templates")  # Asegúrate de tener una carpeta "templates" con tu formulario.html
+app.mount("/static", staticfiles.StaticFiles(directory="static"), name="static") # para mostrar la imagen
+templates = Jinja2Templates(directory="templates") 
 
 # Ruta para mostrar el formulario
 @app.get("/", response_class=HTMLResponse)
