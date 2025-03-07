@@ -17,14 +17,14 @@
 </head>
 <body>
    <!--<div class="container">-->
-    <form method="post" action="/data-processing" class="row g-3 mx-md-5 mx-2">
+    <form method="post" action="/data-processing" class="row g-3 mx-md-5 mx-2" enctype="application/x-www-form-urlencoded">
       <div id = "section1" class="form-section active">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
-              <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
               <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-              <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
             </div>
           </div>
           <h4 style="text-align: center;">Datos personales</h4>
@@ -64,9 +64,9 @@
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
-              <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
               <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-              <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
             </div>
           </div>
           <h4 style="text-align: center;">Información Organismo u Ente</h4>
@@ -81,7 +81,10 @@
           </div>
           <div class="col-md-4">
             <label for="municipio" class="form-label">Municipio </label>
-            <input name="municipio" type="text" class="form-control" id="municipio" required />
+            <select name="municipio" class="form-select" id="municipio" required>
+              <option selected disabled value="">Seleccione su municipio...</option>
+              <option value="chacao">Chacao</option>
+            </select>
           </div>
           <div class="col-md-4">
             <label for="nombre_organismo" class="form-label">Nombre del Organismo u Ente adscrito donde labora </label>
@@ -104,9 +107,9 @@
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
-              <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
               <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-              <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
             </div>
           </div>
           <h4 style="text-align: center;">Actividades de la Oficina</h4>
@@ -158,9 +161,9 @@
       <div id = "section4" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
-            <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
             <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-            <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
           </div>
           <h4 style="text-align: center;">Actividades para la OIPP</h4>
         </div>
@@ -205,9 +208,9 @@
       <div id = "section5" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
-            <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
             <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-            <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
           </div>
           <h4 style="text-align: center;">Actividades Sistema Educativo</h4>
         </div>
@@ -249,9 +252,9 @@
       <div id = "section6" class="form-section">
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
-            <img class="imagen-izquierda" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-izquierda" src="/static/images/logo_contraloria.png">
             <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="franja-titulo" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-            <img class="imagen-derecha" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+            <img class="imagen-derecha" src="/static/images/logo_contraloria.png">
           </div>
           <h4 style="text-align: center;">Actividades Sistema Educativo</h4>
         </div>
@@ -290,9 +293,9 @@
         <div class="row m-md-5 m-3">
           <div class="titulo-con-imagen">
             <div style="text-align: center;">
-              <img class="imagen-izquierdasec4" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-izquierdasec4" src="/static/images/logo_contraloria.png">
               <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
-              <img class="imagen-derechasec4" src="/static/images/SAVE_20250303_195208-removebg-preview.png">
+              <img class="imagen-derechasec4" src="/static/images/logo_contraloria.png">
             </div>
           </div>
           <h4 style="text-align: center;">Actividades para la Administración Publica</h4>
