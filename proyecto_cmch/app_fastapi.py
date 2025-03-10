@@ -10,8 +10,7 @@ app = FastAPI()
 app.mount("/static", staticfiles.StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-
-MONGODB_URI = "mongodb://localhost:27017/" 
+MONGODB_URI = "mongodb+srv://heimdall:Nn77Tw0WPM8Az1W1@cluster0.3vudx.mongodb.net/registro_oac?retryWrites=true&w=majority"
 client = MongoClient(MONGODB_URI)
 
 try:
@@ -20,8 +19,8 @@ try:
 except ConnectionFailure:
     print("No se pudo conectar a MongoDB")
 
-db = client.contraloria
-formulario = db.formulario
+db = client.registro_oac
+
 
 class datos_formulario(BaseModel):
     nombre: str
@@ -167,5 +166,5 @@ async def procesar_formulario(
         "cantidad_funcionarios_femenino_ap": cantidad_funcionarios_femenino_ap,
     }
     # Guardar los datos en MongoDB
-    formulario.insert_one(datos_guardar)
+    db.formulario.insert_one(datos_guardar)
     return templates.TemplateResponse("exito.html", {"request": request})

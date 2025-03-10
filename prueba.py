@@ -13,7 +13,7 @@ templates = Jinja2Templates(directory="templates")
 MONGODB_URI = "mongodb://localhost:27017/"  
 client = MongoClient(MONGODB_URI)
 db = client.contraloria
-formulario = db.formulario
+
 
 @app.get("/", response_class=HTMLResponse)
 async def mostrar_formulario(request: Request):
@@ -113,5 +113,5 @@ async def procesar_formulario(
         "cantidad_funcionarios_femenino_ap": cantidad_funcionarios_femenino_ap,
     }
     # Guardar los datos en MongoDB
-    formulario.insert_one(datos_guardar)
+    db.formulario.insert_one(datos_guardar)
     return templates.TemplateResponse("exito.html", {"request": request})
