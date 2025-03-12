@@ -19,7 +19,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh; /* Asegura que el cuadrado esté centrado verticalmente */
-        margin: 0; /* Elimina el margen predeterminado del body */
+        margin: 10; /* Elimina el margen predeterminado del body */
       }
     </style>
 </head>
@@ -330,6 +330,25 @@
                 <label for="cantidad_charlas_ap" class="form-label">Cantidad de charlas realizadas (A.P.)</label>
                 <input name="cantidad_charlas_ap" type="text" class="form-control" id="cantidad_charlas_ap" required />
             </div>
+          </div>
+          <br>
+          <div class = "col-12">
+            <button type = "button" class = "btn btn-secondary" onclick="nextsection(6)">Anterior</button>
+            <button type = "button" class = "btn btn-primary" onclick="nextsection(8)">Siguiente</button>
+          </div>
+        </div>
+        <div id="section8" class="form-section">
+          <div class="row m-md-5 m-3">
+            <div class="titulo-con-imagen">
+              <div style="text-align: center;">
+                <img class="imagen-izquierdasec4" src="/static/images/logo_contraloria.png">
+                <h1 style="font-family: Georgia, 'Times New Roman', Times, serif;" class="col">CONTRALORÍA MUNICIPAL DE CHACAO</h1>
+                <img class="imagen-derechasec4" src="/static/images/logo_contraloria.png">
+              </div>
+            </div>
+            <h4 style="text-align: center;">Actividades para la Administración Publica</h4>
+          </div>
+          <div class="row">
             <div class="col-md-4">
                 <label for="cantidad_jornadas_ap" class="form-label">Cantidad de jornadas realizadas (A.P.)</label>
                 <input name="cantidad_jornadas_ap" type="text" class="form-control" id="cantidad_jornadas_ap" required />
@@ -338,8 +357,6 @@
                 <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats realizados (A.P.)</label>
                 <input name="cantidad_forochats_ap" type="text" class="form-control" id="cantidad_forochats_ap" required />
             </div>
-          </div>
-          <div class="row">
             <div class="col-md-4">
                 <label for="cantidad_funcionarios_masculino_ap" class="form-label">Cantidad de funcionarios masculinos atendidos en la Administración Pública Nacional </label>
                 <input name="cantidad_funcionarios_masculino_ap" type="text" class="form-control" id="cantidad_funcionarios_masculino_ap" required />
@@ -351,7 +368,7 @@
           </div>
           <br>
           <div class="col-12">
-              <button type = "button" class = "btn btn-secondary" onclick="nextsection(6)">Anterior</button>
+              <button type = "button" class = "btn btn-secondary" onclick="nextsection(7)">Anterior</button>
               <button class="btn btn-primary" type="button" onclick="validarYEnviar()">Enviar Información</button>
           </div>
         </div>
@@ -453,8 +470,8 @@
       right: -16px;
     }
     .div-cuadrado {
-      width: 1400px; /* Ancho del cuadrado */
-      height: 700px; /* Alto del cuadrado */
+      width: auto; /* Ancho del cuadrado */
+      height: auto; /* Alto del cuadrado */
       background-color: white; /* Establece el fondo blanco */
       padding: 20px; /* Añade espacio interno */
       box-sizing: border-box; /* Incluye el padding en el ancho y alto */
