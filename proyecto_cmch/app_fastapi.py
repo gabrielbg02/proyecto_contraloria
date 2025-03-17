@@ -65,6 +65,7 @@ class datos_formulario(Document):
     cantidad_forochats_ap = StringField()
     cantidad_funcionarios_masculino_ap = StringField()
     cantidad_funcionarios_femenino_ap = StringField()
+    observaciones = StringField()
 
     meta = {'collection': 'formulario'}
 
@@ -118,6 +119,7 @@ async def procesar_formulario(
     cantidad_forochats_ap: str = Form(...),
     cantidad_funcionarios_masculino_ap: str = Form(...),
     cantidad_funcionarios_femenino_ap: str = Form(...),
+    observaciones: str = Form (...),
 ):
     datos_guardar = datos_formulario(
         nombre=nombre,
@@ -162,7 +164,8 @@ async def procesar_formulario(
         cantidad_jornadas_ap= cantidad_jornadas_ap,
         cantidad_forochats_ap= cantidad_forochats_ap,
         cantidad_funcionarios_masculino_ap= cantidad_funcionarios_masculino_ap,
-        cantidad_funcionarios_femenino_ap=cantidad_funcionarios_femenino_ap 
+        cantidad_funcionarios_femenino_ap=cantidad_funcionarios_femenino_ap,
+        observaciones = observaciones
     )
     
     datos_guardar.save()
