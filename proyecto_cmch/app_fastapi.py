@@ -31,6 +31,11 @@ class datos_formulario(Document):
     municipio = StringField()
     nombre_organismo = StringField()
     instancia = StringField()
+    nombre_llenado = StringField()
+    correo_llenado = EmailField()
+    cargo_llenado = StringField()
+    numero_cedula_llenado = StringField()
+    numero_telefono_llenado = StringField()
     cantidad_denuncias = StringField()
     cantidad_reclamos = StringField()
     cantidad_quejas = StringField()
@@ -85,6 +90,11 @@ async def procesar_formulario(
     municipio: str = Form(...),
     nombre_organismo: str = Form(...),
     instancia: str = Form(...),
+    nombre_llenado: str = Form(...),
+    correo_llenado: str = Form(...),
+    cargo_llenado: str = Form(...),
+    numero_cedula_llenado: str = Form(...),
+    numero_telefono_llenado: str = Form(...), 
     cantidad_denuncias: str = Form(...),
     cantidad_reclamos: str = Form(...),
     cantidad_quejas: str = Form(...),

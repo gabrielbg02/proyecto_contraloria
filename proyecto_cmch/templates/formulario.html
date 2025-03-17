@@ -65,19 +65,18 @@
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div> 
                 <div class="mb-3">
-                    <label for="correo" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
-                </div>              
+                    <label for="numero_cedula" class="form-label">Número de Cédula </label>
+                    <input name="numero_cedula" type="text" class="form-control" id="numero_cedula" required />
+                  </div>     
                 <div class="mb-3">
                     <label for="cargo" class="form-label">Cargo </label>
                     <input name="cargo" type="text" class="form-control" id="cargo" aria-describedby="inputGroupPrepend2" required/>
                   </div>
                   <!--</div>-->
                   <div class="mb-3">
-                    <label for="numero_cedula" class="form-label">Número de Cédula </label>
-                    <input name="numero_cedula" type="text" class="form-control" id="numero_cedula" required />
-                  </div>
-
+                    <label for="correo" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
+                </div>         
                   <div class="mb-3">
                     <label for="numero_telefono_jefe" class="form-label">Número de Teléfono </label>
                     <input name="numero_telefono_jefe" type="text" class="form-control" id="numero_telefono_jefe" required />
@@ -117,8 +116,43 @@
                     <button type="button" class="btn btn-primary" onclick="nextSection(3)">Siguiente</button>
                 </div>
             </div>
+            
             <div id="section3" class="form-section">
+                <h3 class="text-center">Información Personal de quien llena el formulario</h3>
+                </br>
+                <div class="mb-3">
+                    <label for="nombre_llenado" class="form-label">Nombre y Apellido</label>
+                    <input type="text" class="form-control" id="nombre_llenado" name="nombre_llenado" required>
+                </div> 
+                <div class="mb-3">
+                    <label for="numero_cedula_llenado" class="form-label">Número de Cédula </label>
+                    <input name="numero_cedula_llenado" type="text" class="form-control" id="numero_cedula_llenado" required />
+                </div>     
+                <div class="mb-3">
+                    <label for="cargo_llenado" class="form-label">Cargo </label>
+                    <input name="cargo_llenado" type="text" class="form-control" id="cargo_llenado" aria-describedby="inputGroupPrepend2" required/>
+                </div>
+                  <!--</div>-->
+                <div class="mb-3">
+                    <label for="correo_llenado" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correo_llenado" name="correo_llenado" required>
+                </div>         
+                <div class="mb-3">
+                    <label for="numero_telefono_llenado" class="form-label">Número de Teléfono </label>
+                    <input name="numero_telefono_llenado" type="text" class="form-control" id="numero_telefono_llenado" required />
+                </div>
+                  
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(2)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">Siguiente</button>
+                </div>
+            </div>
+
+
+
+            <div id="section4" class="form-section">
                 <h3 class="text-center">Actividades de la Oficina</h3>
+                <h4 class="text-center">Mecanismos de Participación Cuidadana</h4>
                 </br>
                 <div class="row mb-3">
                     <div class="col-md-4">
@@ -149,12 +183,13 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(2)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(3)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(5)">Siguiente</button>
                 </div>
             </div>
-            <div id="section4" class="form-section">
+            <div id="section5" class="form-section">
                 <h3 class="text-center">Actividades de la Oficina</h3>
+                <h4 class="text-center">Mecanismos de Participación Cuidadana</h4>
                 </br>
                 <div class="row mb-3">
                     <div class="col-md-4">
@@ -172,11 +207,11 @@
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(3)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(5)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(4)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(6)">Siguiente</button>
                 </div>
             </div>
-            <div id="section5" class="form-section">
+            <div id="section6" class="form-section">
                 <h3 class="text-center">Actividades para la OIPP</h3>
                 <br>
                 <div class="row mb-3">
@@ -201,7 +236,7 @@
                 </div>
                 
                 <div class="md-4">
-                    <label for="cantidad_forochats_oipp" class="form-label">Cantidad de foro-chats realizados (OIPP)</label>
+                    <label for="cantidad_forochats_oipp" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (OIPP)</label>
                     <input name="cantidad_forochats_oipp" type="number" class="form-control" id="cantidad_forochats_oipp" required />
                 </div>
                 <div class="md-4">
@@ -213,22 +248,22 @@
                     <input name="cantidad_adulto_femenino_atentida_oipp" type="number" class="form-control" id="cantidad_adulto_femenino_atentida_oipp" required />
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(4)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(6)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(5)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(7)">Siguiente</button>
                 </div>
                 
             </div>
-            <div id="section6" class="form-section">
+            <div id="section7" class="form-section">
                 <h3 class="text-center">Actividades Sistema Educativo</h3>
                 <br>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="nombre_escuela_se" class="form-label">Nombre de la Escuela,Liceo o Universidad donde realizó la actividad (S.E.)</label>
-                        <input name="nombre_escuela_se" type="text" class="form-control" id="nombre_escuela_se" required />
+                        <textarea name="nombre_escuela_se" type="text" class="form-control" id="nombre_escuela_se" required ></textarea>
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad_actividades_se" class="form-label">Describa cantidad y de que tratarón las actividades relizadas al Sistema Educativo (S.E.)</label>
-                        <input name="cantidad_actividades_se" type="text" class="form-control" id="cantidad_actividades_se" required />
+                        <textarea name="cantidad_actividades_se" type="text" class="form-control" id="cantidad_actividades_se" required ></textarea>
                     </div>    
                 </div>                    
                 <div class="row mb-3">
@@ -255,16 +290,16 @@
                 
                   
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(5)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(7)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(6)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(8)">Siguiente</button>
                 </div>
             </div>
-            <div id="section7" class="form-section">
+            <div id="section8" class="form-section">
                 <h3 class="text-center">Actividades Sistema Educativo</h3>
                 <br>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="cantidad_forochats_se" class="form-label">Cantidad de foro-chats realizados (S.E.)</label>
+                        <label for="cantidad_forochats_se" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (S.E.)</label>
                         <input name="cantidad_forochats_se" type="text" class="form-control" id="cantidad_forochats_se" required />
                     </div>
                     <div class="col-md-12">
@@ -289,22 +324,22 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(6)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(8)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(7)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(9)">Siguiente</button>
                 </div>
             </div>
-            <div id="section8" class="form-section">
+            <div id="section9" class="form-section">
 
                 <h3 class="text-center">Actividades para la Administración Pública</h3>
                 <br>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="nombre_ministerio_ap" class="form-label">Nombre del Ministerio, Empresa, Compañia u Ente a quien le dio la actividad competente a la Administración Pública Nacional (A.P.)</label>
-                        <input name="nombre_ministerio_ap" type="text" class="form-control" id="nombre_ministerio_ap" required />
+                        <textarea name="nombre_ministerio_ap" type="text" class="form-control" id="nombre_ministerio_ap" required ></textarea>
                     </div>
                     <div class="col-md-12">
                         <label for="cantidad_actividades_ap" class="form-label">Describa cantidad y de que tratarón las actividades realizadas a la Administración Pública (A.P.)</label>
-                        <input name="cantidad_actividades_ap" type="text" class="form-control" id="cantidad_actividades_ap" required />
+                        <textarea name="cantidad_actividades_ap" type="text" class="form-control" id="cantidad_actividades_ap" required ></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -318,11 +353,11 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(7)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(9)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(8)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(10)">Siguiente</button>
                 </div>
             </div>
-            <div id="section9" class="form-section">
+            <div id="section10" class="form-section">
                 <h3 class="text-center">Actividades para la Administración Pública</h3>
                 <br>
                 <div class="row mb-3">
@@ -331,31 +366,31 @@
                         <input name="cantidad_jornadas_ap" type="text" class="form-control" id="cantidad_jornadas_ap" required />
                     </div>
                     <div class="col-md-6">
-                        <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats realizados (A.P.)</label>
+                        <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (A.P.)</label>
                         <input name="cantidad_forochats_ap" type="text" class="form-control" id="cantidad_forochats_ap" required />
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="cantidad_funcionarios_masculino_ap" class="form-label">Cantidad de funcionarios masculinos atendidos en la Administración Pública Nacional </label>
+                        <label for="cantidad_funcionarios_masculino_ap" class="form-label">Cantidad de servidores públicos masculinos atendidos en la Administración Pública Nacional </label>
                         <input name="cantidad_funcionarios_masculino_ap" type="text" class="form-control" id="cantidad_funcionarios_masculino_ap" required />
                     </div>
                     <div class="col-md-6">
-                        <label for="cantidad_funcionarios_femenino_ap" class="form-label">Cantidad de funcionarias femeninas atendidos en la Administración Pública Nacional </label>
+                        <label for="cantidad_funcionarios_femenino_ap" class="form-label">Cantidad de servidoras públicas femeninas atendidos en la Administración Pública Nacional </label>
                         <input name="cantidad_funcionarios_femenino_ap" type="text" class="form-control" id="cantidad_funcionarios_femenino_ap" required />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(8)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(10)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(9)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(11)">Siguiente</button>
                 </div>
             </div>
-            <div id="section10" class="form-section">
+            <div id="section11" class="form-section">
                 <h3 class="text-center">Observaciones</h3>
                 <br>
                 <textarea name="observaciones" placeholder="Escribe tus observaciones aquí..." style="width: 100%; height: 300px; padding: 10px; font-size: 16px; border: 2px solid #ccc; border-radius: 5px; resize: vertical;"></textarea>  
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(9)">Anterior</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(10)">Anterior</button>
                     <button type="button" class="btn btn-primary" onclick="validarYEnviar()">Enviar</button>
                 </div> 
             </div>
