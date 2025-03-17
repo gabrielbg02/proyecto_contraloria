@@ -23,6 +23,33 @@
             width: 90%;
             max-width: 600px;
         }
+        .observaciones-container {
+            background-color: #FFF;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            color: #083F75;
+            font-size: calc(1.5rem + .6vw);
+            margin-bottom: 1.5rem;
+        }
+        textarea {
+            width: 80%;
+            height: 300px; /* Altura del área de texto */
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
+        textarea:focus {
+            border-color: #083F75; /* Cambia el color del borde al enfocar */
+            outline: none; /* Elimina el contorno predeterminado */
+        }
         .form-section {
             display: none;
         }
@@ -51,11 +78,11 @@
 </head>
 <body>
     <div class="form-container">
+        <div class="d-flex align-items-center mb-4">
+            <img src="/static/images/logo_contraloria.png" alt="Logo" width="150" class="me-3">
+            <h2 class="text-center flex-grow-1">Contraloría Municipal de Chacao</h2>               
+        </div>
         <form method="post" action="/data-processing">
-            <div class="d-flex align-items-center mb-4">
-                <img src="/static/images/logo_contraloria.png" alt="Logo" width="150" class="me-3">
-                <h2 class="text-center flex-grow-1">Contraloría Municipal de Chacao</h2>               
-            </div>
             <div id="section1" class="form-section active">
                 <h3 class="text-center">Datos Personales</h2>
                 <h4 class="text-center"> jefe o jefa de la Oficina de Atencion al Ciudadano</h3>
@@ -148,9 +175,17 @@
                         <input name="cantidad_sugerencias" type="text" class="form-control" id="cantidad_sugerencias" required />
                     </div>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(2)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">Siguiente</button>
+                </div>
+            </div>
+            <div id="section4" class="form-section">
+                <h3 class="text-center">Actividades de la Oficina</h3>
+                </br>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="cantidad_asesorias" class="form-label">úum. de asesorias recibidas </label>
+                        <label for="cantidad_asesorias" class="form-label">Núm. de asesorias recibidas </label>
                         <input name="cantidad_asesorias" type="text" class="form-control" id="cantidad_asesorias" required />
                     </div>
                     <div class="col-md-4">
@@ -164,11 +199,11 @@
                 </div>
                 
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(2)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(4)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(3)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(5)">Siguiente</button>
                 </div>
             </div>
-            <div id="section4" class="form-section">
+            <div id="section5" class="form-section">
                 <h3 class="text-center">Actividades para la OIPP</h3>
                 <br>
                 <div class="row mb-3">
@@ -205,12 +240,12 @@
                     <input name="cantidad_adulto_femenino_atentida_oipp" type="number" class="form-control" id="cantidad_adulto_femenino_atentida_oipp" required />
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(3)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(5)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(4)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(6)">Siguiente</button>
                 </div>
                 
             </div>
-            <div id="section5" class="form-section">
+            <div id="section6" class="form-section">
                 <h3 class="text-center">Actividades Sistema Educativo</h3>
                 <br>
                 <div class="row mb-3">
@@ -247,11 +282,11 @@
                 
                   
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(4)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(6)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(5)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(7)">Siguiente</button>
                 </div>
             </div>
-            <div id="section6" class="form-section">
+            <div id="section7" class="form-section">
                 <h3 class="text-center">Actividades Sistema Educativo</h3>
                 <br>
                 <div class="row mb-3">
@@ -281,34 +316,42 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(5)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="nextSection(7)">Siguiente</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(6)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(8)">Siguiente</button>
                 </div>
             </div>
-            <div id="section7" class="form-section">
+            <div id="section8" class="form-section">
 
                 <h3 class="text-center">Actividades para la Administración Pública</h3>
                 <br>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="nombre_ministerio_ap" class="form-label">Nombre del Ministerio, Empresa, Compañia u Ente a quien le dio la actividad competente a la Administración Pública Nacional (A.P.)</label>
                         <input name="nombre_ministerio_ap" type="text" class="form-control" id="nombre_ministerio_ap" required />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="cantidad_actividades_ap" class="form-label">Describa cantidad y de que tratarón las actividades realizadas a la Administración Pública (A.P.)</label>
                         <input name="cantidad_actividades_ap" type="text" class="form-control" id="cantidad_actividades_ap" required />
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="cantidad_talleres_ap" class="form-label">Cantidad de talleres realizados (A.P.)</label>
                         <input name="cantidad_talleres_ap" type="text" class="form-control" id="cantidad_talleres_ap" required />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="cantidad_charlas_ap" class="form-label">Cantidad de charlas realizadas (A.P.)</label>
                         <input name="cantidad_charlas_ap" type="text" class="form-control" id="cantidad_charlas_ap" required />
                     </div>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(7)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(9)">Siguiente</button>
+                </div>
+            </div>
+            <div id="section9" class="form-section">
+                <h3 class="text-center">Actividades para la Administración Pública</h3>
+                <br>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_jornadas_ap" class="form-label">Cantidad de jornadas realizadas (A.P.)</label>
@@ -329,14 +372,22 @@
                         <input name="cantidad_funcionarios_femenino_ap" type="text" class="form-control" id="cantidad_funcionarios_femenino_ap" required />
                     </div>
                 </div>
-                
-
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="nextSection(6)">Anterior</button>
-                    <button type="button" class="btn btn-primary" onclick="validarYEnviar()">Enviar</button>
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(8)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="nextSection(10)">Siguiente</button>
                 </div>
             </div>
-            
+            <div id="section10" class="form-section">
+                <h3 class="text-center">Observaciones</h3>
+                <br>
+                <textarea placeholder="Escribe tus observaciones aquí..." style="width: 100%; height: 300px; padding: 10px; font-size: 16px; border: 2px solid #ccc; border-radius: 5px; resize: vertical;"></textarea>  
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="nextSection(9)">Anterior</button>
+                    <button type="button" class="btn btn-primary" onclick="validarYEnviar()">Enviar</button>
+                </div> 
+            </div>
+
+
         </form>
     </div>
     <script>
