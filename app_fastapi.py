@@ -31,14 +31,19 @@ class datos_formulario(Document):
     municipio = StringField()
     nombre_organismo = StringField()
     instancia = StringField()
-    cantidad_denuncias = StringField()
-    cantidad_reclamos = StringField()
-    cantidad_quejas = StringField()
-    cantidad_peticiones = StringField()
-    cantidad_sugerencias = StringField()
-    cantidad_asesorias = StringField()
-    cantidad_poblacion_masc = StringField()
-    cantidad_poblacion_fem = StringField()
+    nombre_llenado = StringField()
+    correo_llenado = EmailField()
+    cargo_llenado = StringField()
+    numero_cedula_llenado = StringField()
+    numero_telefono_llenado = StringField()
+    cantidad_denuncias = IntField()
+    cantidad_reclamos = IntField()
+    cantidad_quejas = IntField()
+    cantidad_peticiones = IntField()
+    cantidad_sugerencias = IntField()
+    cantidad_asesorias = IntField()
+    cantidad_poblacion_masc = IntField()
+    cantidad_poblacion_fem = IntField()
     cantidad_talleres_oipp = IntField()
     cantidad_charlas_oipp = IntField ()
     cantidad_conversatorios_oipp = IntField()
@@ -48,23 +53,24 @@ class datos_formulario(Document):
     cantidad_adulto_femenino_atentida_oipp = IntField()
     nombre_escuela_se = StringField()
     cantidad_actividades_se = StringField()
-    cantidad_talleres_se = StringField()
-    cantidad_charlas_se = StringField()
-    cantidad_conversatorios_se = StringField()
-    cantidad_jornadas_se = StringField()
-    cantidad_forochats_se = StringField()
-    cantidad_ninosyadol_masculino_se = StringField()
-    cantidad_ninasyadol_femenino_se = StringField()
-    cantidad_adultos_masculino_atendidos_se = StringField()
-    cantidad_adultos_femenino_atendidos_se = StringField()
+    cantidad_talleres_se = IntField()
+    cantidad_charlas_se = IntField()
+    cantidad_conversatorios_se = IntField()
+    cantidad_jornadas_se = IntField()
+    cantidad_forochats_se = IntField()
+    cantidad_ninosyadol_masculino_se = IntField()
+    cantidad_ninasyadol_femenino_se = IntField()
+    cantidad_adultos_masculino_atendidos_se = IntField()
+    cantidad_adultos_femenino_atendidos_se = IntField()
     nombre_ministerio_ap = StringField()
     cantidad_actividades_ap = StringField()
-    cantidad_talleres_ap = StringField()
-    cantidad_charlas_ap = StringField()
-    cantidad_jornadas_ap = StringField()
-    cantidad_forochats_ap = StringField()
-    cantidad_funcionarios_masculino_ap = StringField()
-    cantidad_funcionarios_femenino_ap = StringField()
+    cantidad_talleres_ap = IntField()
+    cantidad_charlas_ap = IntField()
+    cantidad_jornadas_ap = IntField()
+    cantidad_forochats_ap = IntField()
+    cantidad_funcionarios_masculino_ap = IntField()
+    cantidad_funcionarios_femenino_ap = IntField()
+    observaciones = StringField()
 
     meta = {'collection': 'formulario'}
 
@@ -84,6 +90,11 @@ async def procesar_formulario(
     municipio: str = Form(...),
     nombre_organismo: str = Form(...),
     instancia: str = Form(...),
+    nombre_llenado: str = Form(...),
+    correo_llenado: str = Form(...),
+    cargo_llenado: str = Form(...),
+    numero_cedula_llenado: str = Form(...),
+    numero_telefono_llenado: str = Form(...), 
     cantidad_denuncias: str = Form(...),
     cantidad_reclamos: str = Form(...),
     cantidad_quejas: str = Form(...),
@@ -118,6 +129,7 @@ async def procesar_formulario(
     cantidad_forochats_ap: str = Form(...),
     cantidad_funcionarios_masculino_ap: str = Form(...),
     cantidad_funcionarios_femenino_ap: str = Form(...),
+    observaciones: str = Form (...),
 ):
     datos_guardar = datos_formulario(
         nombre=nombre,
@@ -129,6 +141,11 @@ async def procesar_formulario(
         municipio=municipio,
         nombre_organismo=nombre_organismo,
         instancia=instancia,
+        nombre_llenado=nombre_llenado,
+        correo_llenado=correo_llenado,
+        cargo_llenado=cargo_llenado,
+        numero_cedula_llenado=numero_cedula_llenado,
+        numero_telefono_llenado=numero_telefono_llenado, 
         cantidad_denuncias=cantidad_denuncias,
         cantidad_reclamos=cantidad_reclamos,
         cantidad_quejas=cantidad_quejas,
@@ -162,7 +179,8 @@ async def procesar_formulario(
         cantidad_jornadas_ap= cantidad_jornadas_ap,
         cantidad_forochats_ap= cantidad_forochats_ap,
         cantidad_funcionarios_masculino_ap= cantidad_funcionarios_masculino_ap,
-        cantidad_funcionarios_femenino_ap=cantidad_funcionarios_femenino_ap 
+        cantidad_funcionarios_femenino_ap=cantidad_funcionarios_femenino_ap,
+        observaciones = observaciones
     )
     
     datos_guardar.save()
