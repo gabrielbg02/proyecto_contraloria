@@ -92,7 +92,7 @@
                 <div class="mb-3">
                     <label for="estado" class="form-label">Estado </label>
                     <select name="estado" class="form-select" id="estado" required>
-                      <option selected disabled value="">Seleccione su estado...</option>
+                      <option selected disabled value="">Seleccione su Estado...</option>
                       <option value="Miranda">Miranda</option>
                     </select>
                   </div>
@@ -157,29 +157,29 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="cantidad_denuncias" class="form-label">Núm. de denuncias recibidas </label>
-                        <input name="cantidad_denuncias" type="number" class="form-control" id="cantidad_denuncias" required />                    
+                        <input name="cantidad_denuncias" type="number" min = "0" class="form-control" id="cantidad_denuncias" required />                    
                     </div> 
                     <div class="col-md-4">
                         <label for="cantidad_reclamos" class="form-label">Núm. de denuncias recibidos </label>
-                        <input name="cantidad_reclamos" type="number" class="form-control" id="cantidad_reclamos" required />
+                        <input name="cantidad_reclamos" type="number" min = "0" class="form-control" id="cantidad_reclamos" required />
                     </div>
                     <div class="col-md-4">
                         <label for="cantidad_reclamos" class="form-label">Núm. de reclamos recibidos </label>
-                        <input name="cantidad_reclamos" type="number" class="form-control" id="cantidad_reclamos" required />
+                        <input name="cantidad_reclamos" type="number" min = "0" class="form-control" id="cantidad_reclamos" required />
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="cantidad_quejas" class="form-label">Núm. de quejas recibidas </label>
-                        <input name="cantidad_quejas" type="number" class="form-control" id="cantidad_quejas" required />
+                        <input name="cantidad_quejas" type="number" min = "0" class="form-control" id="cantidad_quejas" required />
                     </div>
                     <div class="col-md-4">
                         <label for="cantidad_peticiones" class="form-label">Núm. de peticiones recibidas </label>
-                        <input name="cantidad_peticiones" type="number" class="form-control" id="cantidad_peticiones" required />
+                        <input name="cantidad_peticiones" type="number" min = "0" class="form-control" id="cantidad_peticiones" required />
                     </div>
                     <div class="col-md-4">
                         <label for="cantidad_sugerencias" class="form-label">Núm. de sugerencias recibidas </label>
-                        <input name="cantidad_sugerencias" type="number" class="form-control" id="cantidad_sugerencias" required />
+                        <input name="cantidad_sugerencias" type="number" min = "0" class="form-control" id="cantidad_sugerencias" required />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -194,15 +194,15 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="cantidad_asesorias" class="form-label">Núm. de asesorias recibidas </label>
-                        <input name="cantidad_asesorias" type="number" class="form-control" id="cantidad_asesorias" required />
+                        <input name="cantidad_asesorias" type="number" min = "0" class="form-control" id="cantidad_asesorias" required />
                     </div>
                     <div class="col-md-4">
                         <label for="cantidad_poblacion_masc" class="form-label">Núm. de población adulto masculino </label>
-                        <input name="cantidad_poblacion_masc" type="number" class="form-control" id="cantidad_poblacion_masc" required />
+                        <input name="cantidad_poblacion_masc" type="number" min = "0" class="form-control" id="cantidad_poblacion_masc" required />
                       </div>
                     <div class="col-md-4">
-                        <label for="cantidad_poblacion_fem" class="form-label">Núm. de población adulto femenina </label>
-                        <input name="cantidad_poblacion_fem" type="number" class="form-control" id="cantidad_poblacion_fem" required />
+                        <label for="cantidad_poblacion_fem" class="form-label">Núm. de población adulta femenina </label>
+                        <input name="cantidad_poblacion_fem" type="number" min = "0" class="form-control" id="cantidad_poblacion_fem" required />
                     </div>
                 </div>
                 
@@ -217,35 +217,35 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_talleres_oipp" class="form-label">Cantidad de talleres realizados (OIPP)</label>
-                        <input name="cantidad_talleres_oipp" type="number" class="form-control" id="cantidad_talleres_oipp" required />
+                        <input name="cantidad_talleres_oipp" type="number" min = "0" class="form-control" id="cantidad_talleres_oipp" required />
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad_charlas_oipp" class="form-label">Cantidad de charlas realizadas (OIPP)</label>
-                        <input name="cantidad_charlas_oipp" type="number" class="form-control" id="cantidad_charlas_oipp" required />
+                        <input name="cantidad_charlas_oipp" type="number" min = "0" class="form-control" id="cantidad_charlas_oipp" required />
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_conversatorios_oipp" class="form-label">Cantidad de conversatorios realizados (OIPP)</label>
-                        <input name="cantidad_conversatorios_oipp" type="number" class="form-control" id="cantidad_conversatorios_oipp" required />
+                        <input name="cantidad_conversatorios_oipp" type="number" min = "0" class="form-control" id="cantidad_conversatorios_oipp" required />
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad_jornadas_oipp" class="form-label">Cantidad de jornadas realizadas (OIPP)</label>
-                        <input name="cantidad_jornadas_oipp" type="number" class="form-control" id="cantidad_jornadas_oipp" required />
+                        <input name="cantidad_jornadas_oipp" type="number" min = "0" class="form-control" id="cantidad_jornadas_oipp" required />
                     </div>
                 </div>
                 
                 <div class="md-4">
-                    <label for="cantidad_forochats_oipp" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (OIPP)</label>
-                    <input name="cantidad_forochats_oipp" type="number" class="form-control" id="cantidad_forochats_oipp" required />
+                    <label for="cantidad_forochats_oipp" class="form-label">Cantidad de foro-chats/video conferencias realizados (OIPP)</label>
+                    <input name="cantidad_forochats_oipp" type="number" min = "0" class="form-control" id="cantidad_forochats_oipp" required />
                 </div>
                 <div class="md-4">
                     <label for="cantidad_adulto_masculino_atentido_oipp" class="form-label">Cantidad de población adulto masculino atendido (OIPP)</label>
-                    <input name="cantidad_adulto_masculino_atentido_oipp" type="number" class="form-control" id="cantidad_adulto_masculino_atentido_oipp" required />
+                    <input name="cantidad_adulto_masculino_atentido_oipp" type="number" min = "0" class="form-control" id="cantidad_adulto_masculino_atentido_oipp" required />
                 </div>
                 <div class="md-4">
-                    <label for="cantidad_adulto_femenino_atentida_oipp" class="form-label">Cantidad de población adulto femenino atendido (OIPP)</label>
-                    <input name="cantidad_adulto_femenino_atentida_oipp" type="number" class="form-control" id="cantidad_adulto_femenino_atentida_oipp" required />
+                    <label for="cantidad_adulto_femenino_atentida_oipp" class="form-label">Cantidad de población adulta femenina atendida (OIPP)</label>
+                    <input name="cantidad_adulto_femenino_atentida_oipp" type="number" min = "0" class="form-control" id="cantidad_adulto_femenino_atentida_oipp" required />
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-secondary" onclick="nextSection(5)">Anterior</button>
@@ -269,22 +269,22 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_talleres_se" class="form-label">Cantidad de talleres realizados (S.E.)</label>
-                        <input name="cantidad_talleres_se" type="number" class="form-control" id="cantidad_talleres_se" required />
+                        <input name="cantidad_talleres_se" type="number" min = "0" class="form-control" id="cantidad_talleres_se" required />
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad_charlas_se" class="form-label">Cantidad de charlas realizadas (S.E.)</label>
-                        <input name="cantidad_charlas_se" type="number" class="form-control" id="cantidad_charlas_se" required />
+                        <input name="cantidad_charlas_se" type="number" min = "0" class="form-control" id="cantidad_charlas_se" required />
                     </div>
                 </div>
                 <div class="row mb-3">
                     
                     <div class="col-md-6">
                         <label for="cantidad_conversatorios_se" class="form-label">Cantidad de conversatorios realizados (S.E.)</label>
-                        <input name="cantidad_conversatorios_se" type="number" class="form-control" id="cantidad_conversatorios_se" required />
+                        <input name="cantidad_conversatorios_se" type="number" min = "0" class="form-control" id="cantidad_conversatorios_se" required />
                     </div>
                     <div class="col-md-6">
                         <label for="cantidad_jornadas_se" class="form-label">Cantidad de jornadas realizadas (S.E.)</label>
-                        <input name="cantidad_jornadas_se" type="number" class="form-control" id="cantidad_jornadas_se" required />
+                        <input name="cantidad_jornadas_se" type="number" min = "0" class="form-control" id="cantidad_jornadas_se" required />
                     </div>
                 </div>
                 
@@ -299,27 +299,27 @@
                 <br>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="cantidad_forochats_se" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (S.E.)</label>
-                        <input name="cantidad_forochats_se" type="number" class="form-control" id="cantidad_forochats_se" required />
+                        <label for="cantidad_forochats_se" class="form-label">Cantidad de foro-chats/video conferencias realizados (S.E.)</label>
+                        <input name="cantidad_forochats_se" type="number" min = "0" class="form-control" id="cantidad_forochats_se" required />
                     </div>
                     <div class="col-md-12">
                         <label for="cantidad_ninosyadol_masculino_se" class="form-label">Cantidad de niños y adolescentes masculinos atendidos (S.E.)</label>
-                        <input name="cantidad_ninosyadol_masculino_se" type="number" class="form-control" id="cantidad_ninosyadol_masculino_se" required />
+                        <input name="cantidad_ninosyadol_masculino_se" type="number" min = "0" class="form-control" id="cantidad_ninosyadol_masculino_se" required />
                     </div>
                     <div class="col-md-12">
-                        <label for="cantidad_ninasyadol_femenino_se" class="form-label">Cantidad de niñas y adolescentes femeninas atendidos (S.E.)</label>
-                        <input name="cantidad_ninasyadol_femenino_se" type="number" class="form-control" id="cantidad_ninasyadol_femenino_se" required />
+                        <label for="cantidad_ninasyadol_femenino_se" class="form-label">Cantidad de niñas y adolescentes femeninas atendidas (S.E.)</label>
+                        <input name="cantidad_ninasyadol_femenino_se" type="number" min = "0" class="form-control" id="cantidad_ninasyadol_femenino_se" required />
                     </div>
                     </div>
                 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_adultos_masculino_atendidos_se" class="form-label">Cantidad de adultos masculinos atendidos (S.E.)</label>
-                        <input name="cantidad_adultos_masculino_atendidos_se" type="number" class="form-control" id="cantidad_adultos_masculino_atendidos_se" required />
+                        <input name="cantidad_adultos_masculino_atendidos_se" type="number" min = "0" class="form-control" id="cantidad_adultos_masculino_atendidos_se" required />
                       </div>
                       <div class="col-md-6">
-                        <label for="cantidad_adultos_femenino_atendidos_se" class="form-label">Cantidad de adultas femeninas atendidos (S.E.)</label>
-                        <input name="cantidad_adultos_femenino_atendidos_se" type="number" class="form-control" id="cantidad_adultos_femenino_atendidos_se" required />
+                        <label for="cantidad_adultos_femenino_atendidos_se" class="form-label">Cantidad de adultas femeninas atendidas (S.E.)</label>
+                        <input name="cantidad_adultos_femenino_atendidos_se" type="number" min = "0" class="form-control" id="cantidad_adultos_femenino_atendidos_se" required />
                       </div>
                 </div>
 
@@ -345,11 +345,11 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="cantidad_talleres_ap" class="form-label">Cantidad de talleres realizados (A.P.)</label>
-                        <input name="cantidad_talleres_ap" type="number" class="form-control" id="cantidad_talleres_ap" required />
+                        <input name="cantidad_talleres_ap" type="number" min = "0" class="form-control" id="cantidad_talleres_ap" required />
                     </div>
                     <div class="col-md-12">
                         <label for="cantidad_charlas_ap" class="form-label">Cantidad de charlas realizadas (A.P.)</label>
-                        <input name="cantidad_charlas_ap" type="number" class="form-control" id="cantidad_charlas_ap" required />
+                        <input name="cantidad_charlas_ap" type="number" min = "0" class="form-control" id="cantidad_charlas_ap" required />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -363,21 +363,21 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_jornadas_ap" class="form-label">Cantidad de jornadas realizadas (A.P.)</label>
-                        <input name="cantidad_jornadas_ap" type="number" class="form-control" id="cantidad_jornadas_ap" required />
+                        <input name="cantidad_jornadas_ap" type="number" min = "0" class="form-control" id="cantidad_jornadas_ap" required />
                     </div>
                     <div class="col-md-6">
-                        <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats/Video Conferencias realizados (A.P.)</label>
-                        <input name="cantidad_forochats_ap" type="number" class="form-control" id="cantidad_forochats_ap" required />
+                        <label for="cantidad_forochats_ap" class="form-label">Cantidad de foro-chats/video conferencias realizados (A.P.)</label>
+                        <input name="cantidad_forochats_ap" type="number" min = "0" class="form-control" id="cantidad_forochats_ap" required />
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cantidad_funcionarios_masculino_ap" class="form-label">Cantidad de servidores públicos masculinos atendidos en la Administración Pública Nacional </label>
-                        <input name="cantidad_funcionarios_masculino_ap" type="number" class="form-control" id="cantidad_funcionarios_masculino_ap" required />
+                        <input name="cantidad_funcionarios_masculino_ap" type="number" min = "0" class="form-control" id="cantidad_funcionarios_masculino_ap" required />
                     </div>
                     <div class="col-md-6">
-                        <label for="cantidad_funcionarios_femenino_ap" class="form-label">Cantidad de servidoras públicas femeninas atendidos en la Administración Pública Nacional </label>
-                        <input name="cantidad_funcionarios_femenino_ap" type="number" class="form-control" id="cantidad_funcionarios_femenino_ap" required />
+                        <label for="cantidad_funcionarios_femenino_ap" class="form-label">Cantidad de servidoras públicas femeninas atendidas en la Administración Pública Nacional </label>
+                        <input name="cantidad_funcionarios_femenino_ap" type="number" min = "0" class="form-control" id="cantidad_funcionarios_femenino_ap" required />
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
