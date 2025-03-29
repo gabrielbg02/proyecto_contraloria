@@ -7,7 +7,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.styles import getSampleStyleSheet
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -35,8 +35,8 @@ except ConnectionFailure as e:
 # Configuración de correo (ajusta estos valores)
 SMTP_SERVER = "smtp.gmail.com"  # Cambia según tu proveedor
 SMTP_PORT = 587
-EMAIL_ADDRESS = "gabrielitoborges32@gmail.com"  # Cambia por tu correo
-EMAIL_PASSWORD = "xbbnpneushvueqto"  # Cambia por tu contraseña o app password
+EMAIL_ADDRESS = "gabrielusuario0208@gmail.com"  # Cambia por tu correo
+EMAIL_PASSWORD = "Fbs983932"  # Cambia por tu contraseña o app password
 
 class datos_formulario(Document):
     nombre = StringField()
@@ -98,8 +98,7 @@ def generar_pdf(datos: datos_formulario, filename: str):
     styles = getSampleStyleSheet()
     
     # Título
-    title = Paragraph("Contraloria Municipal de Chacao", styles["Title"])
-    elements.append(Paragraph("Reporte de Formulario OAC", styles["Heading2"]))
+    title = Paragraph("Reporte de Formulario OAC", styles["Title"])
     elements.append(title)
     elements.append(Spacer(1, 12))
     
@@ -108,44 +107,20 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements.append(fecha)
     elements.append(Spacer(1, 24))
     
-    # ========= SECCIÓN 1: DATOS PERSONALES =========
-    elements.append(Paragraph("1. Datos Personales del Jefe/Jefa de la Oficina de Atencion al Ciudadano", styles["Heading2"]))
-    elements.append(Spacer(1, 12))
-    
-    info_personales = [
-        ["Nombre y Apellido:", datos.nombre],
-        ["Número de Cédula:", datos.numero_cedula],
-        ["Cargo:", datos.cargo],
+    # Información básica
+    info_basica = [
+        ["Nombre:", datos.nombre],
         ["Correo:", datos.correo],
-        ["Número de Teléfono:", datos.numero_telefono_jefe]
-    ]
-    
-    tabla_personales = Table(info_personales, colWidths=[200, 300])
-    tabla_personales.setStyle(TableStyle([
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-        ('ALIGN', (1,0), (1,-1), 'LEFT'),
-        ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
-        ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
-    ]))
-    elements.append(tabla_personales)
-    elements.append(Spacer(1, 24))
-    
-    # ========= SECCIÓN 2: INFORMACIÓN DEL ORGANISMO =========
-    elements.append(Paragraph("2. Información del Organismo/Ente", styles["Heading2"]))
-    elements.append(Spacer(1, 12))
-    
-    info_organismo = [
+        ["Cargo:", datos.cargo],
         ["Estado:", datos.estado],
         ["Municipio:", datos.municipio],
-        ["Nombre del Organismo:", datos.nombre_organismo],
+        ["Organismo:", datos.nombre_organismo],
         ["Instancia:", datos.instancia]
     ]
     
-    tabla_organismo = Table(info_organismo, colWidths=[200, 300])
-    tabla_organismo.setStyle(TableStyle([
+    # Tabla de datos generales
+    tabla_info = Table(info_basica, colWidths=[150, 300])
+    tabla_info.setStyle(TableStyle([
         ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
         ('FONTSIZE', (0,0), (-1,-1), 10),
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
@@ -154,168 +129,47 @@ def generar_pdf(datos: datos_formulario, filename: str):
         ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
         ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
     ]))
-    elements.append(tabla_organismo)
+    
+    elements.append(tabla_info)
     elements.append(Spacer(1, 24))
     
-    # ========= SECCIÓN 3: PERSONA QUE LLENÓ EL FORMULARIO =========
-    elements.append(Paragraph("3. Informacion Personal de Quien Llenó el Formulario", styles["Heading2"]))
-    elements.append(Spacer(1, 12))
-    
-    info_personal_llenado = [
-        ["Nombre y Apellido:", datos.nombre_llenado],
-        ["Número de Cédula:", datos.numero_cedula_llenado],
-        ["Cargo:", datos.cargo_llenado],
-        ["Correo:", datos.correo_llenado],
-        ["Número de Teléfono:", datos.numero_telefono_llenado]
+    # Sección de estadísticas
+    secciones = [
+        ("Denuncias y Solicitudes", [
+            ("Denuncias", datos.cantidad_denuncias),
+            ("Reclamos", datos.cantidad_reclamos),
+            ("Quejas", datos.cantidad_quejas),
+            ("Peticiones", datos.cantidad_peticiones),
+            ("Sugerencias", datos.cantidad_sugerencias),
+            ("Asesorías", datos.cantidad_asesorias)
+        ]),
+        ("Población Atendida", [
+            ("Población Masculina", datos.cantidad_poblacion_masc),
+            ("Población Femenina", datos.cantidad_poblacion_fem)
+        ])
+        # Agrega más secciones según necesites
     ]
     
-    tabla_personal_llenado = Table(info_personal_llenado, colWidths=[200, 300])
-    tabla_personal_llenado.setStyle(TableStyle([
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-        ('ALIGN', (1,0), (1,-1), 'LEFT'),
-        ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
-        ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
-    ]))
-    elements.append(tabla_personal_llenado)
-    elements.append(Spacer(1, 24))
-    
-    # ========= SECCIÓN 4: ATENCIÓN AL CIUDADANO =========
-    elements.append(Paragraph("4. Actividades de la Oficina", styles["Heading2"]))
-    elements.append(Paragraph("   Mecanismos de Participacion Ciudadana", styles["Heading3"]))
-    elements.append(Spacer(1, 12))
-    
-    atencion_ciudadano = [
-        ["Denuncias recibidas:", datos.cantidad_denuncias],
-        ["Reclamos recibidos:", datos.cantidad_reclamos],
-        ["Quejas recibidas:", datos.cantidad_quejas],
-        ["Peticiones recibidas:", datos.cantidad_peticiones],
-        ["Sugerencias recibidas:", datos.cantidad_sugerencias],
-        ["Asesorías realizadas:", datos.cantidad_asesorias],
-        ["Población masculina atendida:", datos.cantidad_poblacion_masc],
-        ["Población femenina atendida:", datos.cantidad_poblacion_fem]
-    ]
-    
-    tabla_atencion = Table(atencion_ciudadano, colWidths=[200, 100])
-    tabla_atencion.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('PADDING', (0,0), (-1,-1), 5),
-    ]))
-    elements.append(tabla_atencion)
-    elements.append(Spacer(1, 24))
-    
-    # ========= SECCIÓN 5: ORIENTACIÓN E INFORMACIÓN (OIPP) =========
-    elements.append(Paragraph("5. Actividades para la OIPP", styles["Heading2"]))
-    elements.append(Spacer(1, 12))
-    
-    actividades_oipp = [
-        ["Talleres realizados:", datos.cantidad_talleres_oipp],
-        ["Charlas realizadas:", datos.cantidad_charlas_oipp],
-        ["Conversatorios realizados:", datos.cantidad_conversatorios_oipp],
-        ["Jornadas realizadas:", datos.cantidad_jornadas_oipp],
-        ["Forochats realizados:", datos.cantidad_forochats_oipp],
-        ["Adultos masculinos atendidos:", datos.cantidad_adulto_masculino_atentido_oipp],
-        ["Adultos femeninos atendidos:", datos.cantidad_adulto_femenino_atentida_oipp]
-    ]
-    
-    tabla_oipp = Table(actividades_oipp, colWidths=[200, 100])
-    tabla_oipp.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('PADDING', (0,0), (-1,-1), 5),
-    ]))
-    elements.append(tabla_oipp)
-    elements.append(Spacer(1, 24))
-    
-    if datos.nombre_escuela_se:  # Solo mostrar si hay datos
-        elements.append(Paragraph("6. Actividades Sistema Educativo", styles["Heading2"]))
-        elements.append(Spacer(1, 12))
+    for titulo, items in secciones:
+        elements.append(Paragraph(titulo, styles["Heading2"]))
+        elements.append(Spacer(1, 8))
         
-        # Creamos un estilo especial para celdas con texto largo
-        estilo_texto_largo = ParagraphStyle(
-            'texto_largo',
-            parent=styles['Normal'],
-            wordWrap='CJK'  # Permite el ajuste de texto
-        )
-        
-        # Preparamos los datos con Paragraph para texto largo
-        descripcion_actividades = Paragraph(datos.cantidad_actividades_se, estilo_texto_largo) if datos.cantidad_actividades_se else ""
-        
-        servicio_educativo = [
-            ["Nombre de la escuela:", datos.nombre_escuela_se],
-            ["Cantidad y descripción de actividades:", descripcion_actividades],
-            ["Talleres realizados:", str(datos.cantidad_talleres_se)],
-            ["Charlas realizadas:", str(datos.cantidad_charlas_se)],
-            ["Conversatorios realizados:", str(datos.cantidad_conversatorios_se)],
-            ["Jornadas realizadas:", str(datos.cantidad_jornadas_se)],
-            ["Forochats realizados:", str(datos.cantidad_forochats_se)],
-            ["Niños/adolescentes masculinos atendidos:", str(datos.cantidad_ninosyadol_masculino_se)],
-            ["Niñas/adolescentes femeninas atendidas:", str(datos.cantidad_ninasyadol_femenino_se)],
-            ["Adultos masculinos atendidos:", str(datos.cantidad_adultos_masculino_atendidos_se)],
-            ["Adultos femeninos atendidos:", str(datos.cantidad_adultos_femenino_atendidos_se)]
-        ]
-        
-        # Creamos la tabla con ajuste automático de altura
-        tabla_educativo = Table(servicio_educativo, colWidths=[200, 300])
-        tabla_educativo.setStyle(TableStyle([
+        tabla = Table([[k, str(v)] for k, v in items], colWidths=[200, 100])
+        tabla.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
             ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
             ('FONTSIZE', (0,0), (-1,-1), 10),
             ('PADDING', (0,0), (-1,-1), 5),
-            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-            ('ALIGN', (1,0), (1,-1), 'LEFT'),
-            ('RIGHTPADDING', (1,1), (1,1), 10),  # Celda de descripción
-            ('LEFTPADDING', (1,1), (1,1), 10),
         ]))
-        elements.append(tabla_educativo)
-        elements.append(Spacer(1, 24))
+        
+        elements.append(tabla)
+        elements.append(Spacer(1, 16))
     
-    # ========= SECCIÓN 7: ATENCIÓN A FUNCIONARIOS =========
-    if datos.nombre_ministerio_ap:  # Solo mostrar si hay datos
-        elements.append(Paragraph("7. Actividades para la Administración Pública", styles["Heading2"]))
-        elements.append(Spacer(1, 12))
-        
-        # Preparamos los datos con Paragraph para texto largo
-        descripcion_actividades_ap = Paragraph(datos.cantidad_actividades_ap, estilo_texto_largo) if datos.cantidad_actividades_ap else ""
-        
-        atencion_funcionarios = [
-            ["Ministerio/Institución:", datos.nombre_ministerio_ap],
-            ["Cantidad y descripción de actividades:", descripcion_actividades_ap],
-            ["Talleres realizados:", str(datos.cantidad_talleres_ap)],
-            ["Charlas realizadas:", str(datos.cantidad_charlas_ap)],
-            ["Jornadas realizadas:", str(datos.cantidad_jornadas_ap)],
-            ["Forochats realizados:", str(datos.cantidad_forochats_ap)],
-            ["Funcionarios masculinos atendidos:", str(datos.cantidad_funcionarios_masculino_ap)],
-            ["Funcionarios femeninos atendidos:", str(datos.cantidad_funcionarios_femenino_ap)]
-        ]
-        
-        tabla_funcionarios = Table(atencion_funcionarios, colWidths=[200, 300])
-        tabla_funcionarios.setStyle(TableStyle([
-            ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-            ('FONTSIZE', (0,0), (-1,-1), 10),
-            ('PADDING', (0,0), (-1,-1), 5),
-            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-            ('ALIGN', (1,0), (1,-1), 'LEFT'),
-            ('RIGHTPADDING', (1,1), (1,1), 10),  # Celda de descripción
-            ('LEFTPADDING', (1,1), (1,1), 10),
-        ]))
-        elements.append(tabla_funcionarios)
-        elements.append(Spacer(1, 24))
-    
-    # ========= SECCIÓN 8: OBSERVACIONES =========
+    # Observaciones
     if datos.observaciones:
-        elements.append(Paragraph("8. Observaciones", styles["Heading2"]))
+        elements.append(Paragraph("Observaciones", styles["Heading3"]))
         elements.append(Spacer(1, 8))
         elements.append(Paragraph(datos.observaciones, styles["Normal"]))
-        elements.append(Spacer(1, 24))
     
     doc.build(elements)
 
