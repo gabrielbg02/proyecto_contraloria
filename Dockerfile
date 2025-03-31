@@ -15,10 +15,10 @@ COPY . ./
 
 
 # Comando para ejecutar la aplicación
-CMD ["uvicorn", "app_fastapi:app", "--host", "0.0.0.0", "--port", "8002", "--workers", "4"]
+CMD ["uvicorn", "app_fastapi:app", "--host", "0.0.0.0", "--port", "8003", "--workers", "4"]
 
 # Exponer el puerto en el que se ejecutará FastAPI
-EXPOSE 8002
+EXPOSE 8003
 
 #Usar una imagen base de Python
 #FROM python:3.9-slim
