@@ -40,8 +40,8 @@ except ConnectionFailure as e:
 # Configuración de correo (ajusta estos valores)
 SMTP_SERVER = "smtp.gmail.com"  # Cambia según tu proveedor
 SMTP_PORT = 587
-EMAIL_ADDRESS = "gabrielitoborges32@gmail.com"  # Cambia por tu correo
-EMAIL_PASSWORD = "xbbnpneushvueqto"  # Cambia por tu contraseña o app password
+EMAIL_ADDRESS = "cmchreporte@gmail.com"  # Cambia por tu correo
+EMAIL_PASSWORD = "rpwogaiezebbpecn"  # Cambia por tu contraseña o app password
 
 class datos_formulario(Document):
     nombre = StringField()
