@@ -26,7 +26,12 @@ templates = Jinja2Templates(directory="templates")
 # Configuración de MongoDB (tu código actual)
 try:
     connect(
-         host="mongodb://localhost:27017",  # Conexión local básica,
+        db = "registro_oac",
+        username = "heimdall",
+        password = "Nn77Tw0WPM8Az1W1",
+        host = "mongodb+srv://cluster0.3vudx.mongodb.net",
+        authentication_source = 'admin',
+        ssl = True,
     )
     print("Conexión a MongoDB exitosa")
 except ConnectionFailure as e:
