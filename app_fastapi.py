@@ -207,7 +207,7 @@ def generar_pdf(datos: datos_formulario, filename: str):
     #elements.append(Spacer(1, 12))
     
     # Fecha de generación
-    fecha = Paragraph(f"Generado el: {datetime.now().strftime('%d/%m/%Y %H:%M')}", styles["Normal"])
+    fecha = Paragraph(f"Generad0 el: {datetime.now().strftime('%d/%m/%Y %H:%M')}", styles["Normal"])
     elements.append(fecha)
     elements.append(Spacer(1, 24))
     
