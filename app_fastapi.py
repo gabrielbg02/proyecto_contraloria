@@ -14,6 +14,10 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from datetime import datetime
 from reportlab.lib.utils import ImageReader
+from PIL import Image
+from io import BytesIO
+
+
 
 app = FastAPI()
 app.mount("/static", staticfiles.StaticFiles(directory="static"), name="static")
@@ -93,6 +97,39 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements = []
     styles = getSampleStyleSheet()
     
+    # Configuración común para todas las tablas
+    TABLE_WIDTH = 500  # Ancho fijo para todas las tablas
+    FIRST_COL_WIDTH = 200  # Ancho columna descriptiva
+    SECOND_COL_WIDTH = TABLE_WIDTH - FIRST_COL_WIDTH  # Ancho columna datos
+
+
+
+    # Creamos un estilo especial para celdas con texto largo
+    estilo_texto_largo = ParagraphStyle(
+        'texto_largo',
+        parent=styles['Normal'],
+        wordWrap='CJK',
+        fontSize=10,
+        leading=12,
+        spaceBefore=6,
+        spaceAfter=6,
+        splitLongWords=True,
+        keepWithNext=False
+    )
+
+    estilo_tabla = TableStyle([
+        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
+        ('FONTSIZE', (0,0), (-1,-1), 10),
+        ('TEXTCOLOR', (0,0), (-1,-1), colors.black),
+        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+        ('ALIGN', (0,0), (0,-1), 'LEFT'),
+        ('ALIGN', (1,0), (1,-1), 'LEFT'),
+        ('LEFTPADDING', (0,0), (-1,-1), 5),
+        ('RIGHTPADDING', (0,0), (-1,-1), 5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
+        ('WORDWRAP', (0,0), (-1,-1), True),  # Nueva línea importante
+    ])
     # Obtener la ruta base del proyecto
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
@@ -102,18 +139,31 @@ def generar_pdf(datos: datos_formulario, filename: str):
         
         # Agregar imagen en esquina superior izquierda
         if os.path.exists(img_path):
-            img = ImageReader(img_path)
-            canvas.drawImage(img, 40, doc.pagesize[1] - 100, width=100, height=80, preserveAspectRatio=True)
-        
-        # Agregar misma imagen en esquina superior derecha (o usa otra imagen si lo prefieres)
-        if os.path.exists(img_path):
-            canvas.drawImage(img, doc.pagesize[0] - 140, doc.pagesize[1] - 100, width=100, height=80, preserveAspectRatio=True)
-        
+        # Procesar la imagen con PIL
+            pil_img = Image.open(img_path)
+            if pil_img.mode != 'RGBA':
+                pil_img = pil_img.convert('RGBA')
+                
+            # Crear fondo blanco
+            background = Image.new('RGBA', pil_img.size, (255, 255, 255))
+            img_with_background = Image.alpha_composite(background, pil_img).convert('RGB')
+            
+            # Convertir a bytes para ImageReader
+            img_byte_arr = BytesIO()
+            img_with_background.save(img_byte_arr, format='JPEG')
+            img_byte_arr.seek(0)
+            
+            # Usar la imagen procesada
+            img = ImageReader(img_byte_arr)
+            canvas.drawImage(img, 40, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
+            canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
         # Texto del encabezado
-        canvas.setFont("Helvetica-Bold", 18)
+        canvas.setFont("Helvetica", 18)
         canvas.drawString(200, doc.pagesize[1] - 50, "Contraloría Municipal de Chacao")
         canvas.setFont("Helvetica", 14)
         canvas.drawString(200, doc.pagesize[1] - 70, "Reporte de Formulario OAC")
+        canvas.setFont("Helvetica", 9)
+        canvas.drawRightString(doc.pagesize[0] - 50, 30, f"{doc.page}")
     
     def on_later_pages(canvas, doc):
         # Ruta absoluta a la imagen para páginas siguientes
@@ -121,15 +171,27 @@ def generar_pdf(datos: datos_formulario, filename: str):
         
         # Repetir imágenes en páginas siguientes
         if os.path.exists(img_path):
-            img = ImageReader(img_path)
-            # Esquina izquierda
-            canvas.drawImage(img, 40, doc.pagesize[1] - 100, width=100, height=80, preserveAspectRatio=True)
-            # Esquina derecha
-            canvas.drawImage(img, doc.pagesize[0] - 140, doc.pagesize[1] - 100, width=100, height=80, preserveAspectRatio=True)
-        
+        # Procesar la imagen con PIL
+            pil_img = Image.open(img_path)
+            if pil_img.mode != 'RGBA':
+                pil_img = pil_img.convert('RGBA')
+                
+            # Crear fondo blanco
+            background = Image.new('RGBA', pil_img.size, (255, 255, 255))
+            img_with_background = Image.alpha_composite(background, pil_img).convert('RGB')
+            
+            # Convertir a bytes para ImageReader
+            img_byte_arr = BytesIO()
+            img_with_background.save(img_byte_arr, format='JPEG')
+            img_byte_arr.seek(0)
+            
+            # Usar la imagen procesada
+            img = ImageReader(img_byte_arr)
+            canvas.drawImage(img, 40, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
+            canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
         # Número de página
         canvas.setFont("Helvetica", 9)
-        canvas.drawRightString(doc.pagesize[0] - 50, 30, f"Página {doc.page}")
+        canvas.drawRightString(doc.pagesize[0] - 50, 30, f"{doc.page}")
 
 
 
@@ -149,23 +211,15 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements.append(Spacer(1, 12))
     
     info_personales = [
-        ["Nombre y Apellido:", datos.nombre],
-        ["Número de Cédula:", datos.numero_cedula],
-        ["Cargo:", datos.cargo],
-        ["Correo:", datos.correo],
-        ["Número de Teléfono:", datos.numero_telefono_jefe]
+        ["Nombre y Apellido:", Paragraph(datos.nombre, estilo_texto_largo)],
+        ["Número de Cédula:", Paragraph(datos.numero_cedula, estilo_texto_largo)],
+        ["Cargo:", Paragraph(datos.cargo, estilo_texto_largo)],
+        ["Correo:", Paragraph(datos.correo, estilo_texto_largo)],
+        ["Teléfono:", Paragraph(datos.numero_telefono_jefe, estilo_texto_largo)]
     ]
     
-    tabla_personales = Table(info_personales, colWidths=[200, 300])
-    tabla_personales.setStyle(TableStyle([
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-        ('ALIGN', (1,0), (1,-1), 'LEFT'),
-        ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
-        ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
-    ]))
+    tabla_personales = Table(info_personales,colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+    tabla_personales.setStyle(estilo_tabla)
     elements.append(tabla_personales)
     elements.append(Spacer(1, 24))
     
@@ -174,22 +228,14 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements.append(Spacer(1, 12))
     
     info_organismo = [
-        ["Estado:", datos.estado],
-        ["Municipio:", datos.municipio],
-        ["Nombre del Organismo:", datos.nombre_organismo],
-        ["Instancia:", datos.instancia]
+        ["Estado:", Paragraph(datos.estado, estilo_texto_largo)],
+        ["Municipio:", Paragraph(datos.municipio, estilo_texto_largo)],
+        ["Nombre del Organismo:", Paragraph(datos.nombre_organismo, estilo_texto_largo)],
+        ["Instancia:", Paragraph(datos.instancia, estilo_texto_largo)]
     ]
     
-    tabla_organismo = Table(info_organismo, colWidths=[200, 300])
-    tabla_organismo.setStyle(TableStyle([
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-        ('ALIGN', (1,0), (1,-1), 'LEFT'),
-        ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
-        ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
-    ]))
+    tabla_organismo = Table(info_organismo,colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+    tabla_organismo.setStyle(estilo_tabla)  # Reutiliza el mismo estilo
     elements.append(tabla_organismo)
     elements.append(Spacer(1, 24))
     
@@ -198,49 +244,39 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements.append(Spacer(1, 12))
     
     info_personal_llenado = [
-        ["Nombre y Apellido:", datos.nombre_llenado],
-        ["Número de Cédula:", datos.numero_cedula_llenado],
-        ["Cargo:", datos.cargo_llenado],
-        ["Correo:", datos.correo_llenado],
-        ["Número de Teléfono:", datos.numero_telefono_llenado]
+        ["Nombre y Apellido:", Paragraph(datos.nombre_llenado,estilo_texto_largo)],
+        ["Número de Cédula:", Paragraph(datos.numero_cedula_llenado,estilo_texto_largo)],
+        ["Cargo:", Paragraph(datos.cargo_llenado,estilo_texto_largo)],
+        ["Correo:", Paragraph(datos.correo_llenado,estilo_texto_largo)],
+        ["Número de Teléfono:", Paragraph(datos.numero_telefono_llenado,estilo_texto_largo)]
     ]
     
-    tabla_personal_llenado = Table(info_personal_llenado, colWidths=[200, 300])
-    tabla_personal_llenado.setStyle(TableStyle([
-        ('FONTNAME', (0,0), (-1,-1), 'Helvetica'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-        ('ALIGN', (1,0), (1,-1), 'LEFT'),
-        ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor('#333333')),
-        ('TEXTCOLOR', (1,0), (1,-1), colors.HexColor('#000066')),
-    ]))
+    tabla_personal_llenado = Table(info_personal_llenado, 
+                         colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+    tabla_personal_llenado.setStyle(estilo_tabla)
     elements.append(tabla_personal_llenado)
     elements.append(Spacer(1, 24))
     
     # ========= SECCIÓN 4: ATENCIÓN AL CIUDADANO =========
+    elements.append(Spacer(1, 58))
     elements.append(Paragraph("4. Actividades de la Oficina", styles["Heading2"]))
     elements.append(Paragraph("   Mecanismos de Participacion Ciudadana", styles["Heading3"]))
     elements.append(Spacer(1, 12))
     
     atencion_ciudadano = [
-        ["Denuncias recibidas:", datos.cantidad_denuncias],
-        ["Reclamos recibidos:", datos.cantidad_reclamos],
-        ["Quejas recibidas:", datos.cantidad_quejas],
-        ["Peticiones recibidas:", datos.cantidad_peticiones],
-        ["Sugerencias recibidas:", datos.cantidad_sugerencias],
-        ["Asesorías realizadas:", datos.cantidad_asesorias],
-        ["Población masculina atendida:", datos.cantidad_poblacion_masc],
-        ["Población femenina atendida:", datos.cantidad_poblacion_fem]
+        ["Denuncias recibidas:", Paragraph(str(datos.cantidad_denuncias),estilo_texto_largo)],
+        ["Reclamos recibidos:", Paragraph(str(datos.cantidad_reclamos),estilo_texto_largo)],
+        ["Quejas recibidas:", Paragraph(str(datos.cantidad_quejas),estilo_texto_largo)],
+        ["Peticiones recibidas:", Paragraph(str(datos.cantidad_peticiones),estilo_texto_largo)],
+        ["Sugerencias recibidas:", Paragraph(str(datos.cantidad_sugerencias),estilo_texto_largo)],
+        ["Asesorías realizadas:", Paragraph(str(datos.cantidad_asesorias),estilo_texto_largo)],
+        ["Población masculina atendida:", Paragraph(str(datos.cantidad_poblacion_masc),estilo_texto_largo)],
+        ["Población femenina atendida:", Paragraph(str(datos.cantidad_poblacion_fem),estilo_texto_largo)]
     ]
     
-    tabla_atencion = Table(atencion_ciudadano, colWidths=[200, 100])
-    tabla_atencion.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('PADDING', (0,0), (-1,-1), 5),
-    ]))
+    tabla_atencion = Table(atencion_ciudadano, 
+                         colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+    tabla_atencion.setStyle(estilo_tabla)
     elements.append(tabla_atencion)
     elements.append(Spacer(1, 24))
     
@@ -249,22 +285,18 @@ def generar_pdf(datos: datos_formulario, filename: str):
     elements.append(Spacer(1, 12))
     
     actividades_oipp = [
-        ["Talleres realizados:", datos.cantidad_talleres_oipp],
-        ["Charlas realizadas:", datos.cantidad_charlas_oipp],
-        ["Conversatorios realizados:", datos.cantidad_conversatorios_oipp],
-        ["Jornadas realizadas:", datos.cantidad_jornadas_oipp],
-        ["Forochats realizados:", datos.cantidad_forochats_oipp],
-        ["Adultos masculinos atendidos:", datos.cantidad_adulto_masculino_atentido_oipp],
-        ["Adultos femeninos atendidos:", datos.cantidad_adulto_femenino_atentida_oipp]
+        ["Talleres realizados:", Paragraph(str(datos.cantidad_talleres_oipp),estilo_texto_largo)],
+        ["Charlas realizadas:", Paragraph(str(datos.cantidad_charlas_oipp),estilo_texto_largo)],
+        ["Conversatorios realizados:", Paragraph(str(datos.cantidad_conversatorios_oipp),estilo_texto_largo)],
+        ["Jornadas realizadas:", Paragraph(str(datos.cantidad_jornadas_oipp),estilo_texto_largo)],
+        ["Forochats realizados:", Paragraph(str(datos.cantidad_forochats_oipp),estilo_texto_largo)],
+        ["Adultos masculinos atendidos:", Paragraph(str(datos.cantidad_adulto_masculino_atentido_oipp),estilo_texto_largo)],
+        ["Adultos femeninos atendidos:", Paragraph(str(datos.cantidad_adulto_femenino_atentida_oipp),estilo_texto_largo)]
     ]
     
-    tabla_oipp = Table(actividades_oipp, colWidths=[200, 100])
-    tabla_oipp.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('PADDING', (0,0), (-1,-1), 5),
-    ]))
+    tabla_oipp = Table(actividades_oipp, 
+                       colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+    tabla_oipp.setStyle(estilo_tabla)
     elements.append(tabla_oipp)
     elements.append(Spacer(1, 24))
     
@@ -272,43 +304,28 @@ def generar_pdf(datos: datos_formulario, filename: str):
         elements.append(Paragraph("6. Actividades Sistema Educativo", styles["Heading2"]))
         elements.append(Spacer(1, 12))
         
-        # Creamos un estilo especial para celdas con texto largo
-        estilo_texto_largo = ParagraphStyle(
-            'texto_largo',
-            parent=styles['Normal'],
-            wordWrap='CJK'  # Permite el ajuste de texto
-        )
         
         # Preparamos los datos con Paragraph para texto largo
-        descripcion_actividades = Paragraph(datos.cantidad_actividades_se, estilo_texto_largo) if datos.cantidad_actividades_se else ""
+        descripcion_actividades = datos.cantidad_actividades_se if datos.cantidad_actividades_se else ""
         
         servicio_educativo = [
-            ["Nombre de la escuela:", datos.nombre_escuela_se],
-            ["Cantidad y descripción de actividades:", descripcion_actividades],
-            ["Talleres realizados:", str(datos.cantidad_talleres_se)],
-            ["Charlas realizadas:", str(datos.cantidad_charlas_se)],
-            ["Conversatorios realizados:", str(datos.cantidad_conversatorios_se)],
-            ["Jornadas realizadas:", str(datos.cantidad_jornadas_se)],
-            ["Forochats realizados:", str(datos.cantidad_forochats_se)],
-            ["Niños/adolescentes masculinos atendidos:", str(datos.cantidad_ninosyadol_masculino_se)],
-            ["Niñas/adolescentes femeninas atendidas:", str(datos.cantidad_ninasyadol_femenino_se)],
-            ["Adultos masculinos atendidos:", str(datos.cantidad_adultos_masculino_atendidos_se)],
-            ["Adultos femeninos atendidos:", str(datos.cantidad_adultos_femenino_atendidos_se)]
+            ["Nombre de la escuela:", Paragraph(datos.nombre_escuela_se,estilo_texto_largo)],
+            ["Cantidad y descripción de actividades:", Paragraph(datos.cantidad_actividades_se, estilo_texto_largo) if datos.cantidad_actividades_se else ""],            
+            ["Talleres realizados:", Paragraph(str(datos.cantidad_talleres_se),estilo_texto_largo)],
+            ["Charlas realizadas:", Paragraph(str(datos.cantidad_charlas_se),estilo_texto_largo)],
+            ["Conversatorios realizados:", Paragraph(str(datos.cantidad_conversatorios_se),estilo_texto_largo)],
+            ["Jornadas realizadas:", Paragraph(str(datos.cantidad_jornadas_se),estilo_texto_largo)],
+            ["Forochats realizados:", Paragraph(str(datos.cantidad_forochats_se),estilo_texto_largo)],
+            ["Niños/adolescentes masculinos atendidos:", Paragraph(str(datos.cantidad_ninosyadol_masculino_se),estilo_texto_largo)],
+            ["Niñas/adolescentes femeninas atendidas:", Paragraph(str(datos.cantidad_ninasyadol_femenino_se),estilo_texto_largo)],
+            ["Adultos masculinos atendidos:", Paragraph(str(datos.cantidad_adultos_masculino_atendidos_se),estilo_texto_largo)],
+            ["Adultos femeninos atendidos:", Paragraph(str(datos.cantidad_adultos_femenino_atendidos_se),estilo_texto_largo)]
         ]
         
         # Creamos la tabla con ajuste automático de altura
-        tabla_educativo = Table(servicio_educativo, colWidths=[200, 300])
-        tabla_educativo.setStyle(TableStyle([
-            ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-            ('FONTSIZE', (0,0), (-1,-1), 10),
-            ('PADDING', (0,0), (-1,-1), 5),
-            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-            ('ALIGN', (1,0), (1,-1), 'LEFT'),
-            ('RIGHTPADDING', (1,1), (1,1), 10),  # Celda de descripción
-            ('LEFTPADDING', (1,1), (1,1), 10),
-        ]))
+        tabla_educativo = Table(servicio_educativo, 
+                                colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+        tabla_educativo.setStyle(estilo_tabla)
         elements.append(tabla_educativo)
         elements.append(Spacer(1, 24))
     
@@ -318,31 +335,22 @@ def generar_pdf(datos: datos_formulario, filename: str):
         elements.append(Spacer(1, 12))
         
         # Preparamos los datos con Paragraph para texto largo
-        descripcion_actividades_ap = Paragraph(datos.cantidad_actividades_ap, estilo_texto_largo) if datos.cantidad_actividades_ap else ""
+        descripcion_actividades_ap = datos.cantidad_actividades_ap if datos.cantidad_actividades_ap else ""
         
         atencion_funcionarios = [
-            ["Ministerio/Institución:", datos.nombre_ministerio_ap],
-            ["Cantidad y descripción de actividades:", descripcion_actividades_ap],
-            ["Talleres realizados:", str(datos.cantidad_talleres_ap)],
-            ["Charlas realizadas:", str(datos.cantidad_charlas_ap)],
-            ["Jornadas realizadas:", str(datos.cantidad_jornadas_ap)],
-            ["Forochats realizados:", str(datos.cantidad_forochats_ap)],
-            ["Funcionarios masculinos atendidos:", str(datos.cantidad_funcionarios_masculino_ap)],
-            ["Funcionarios femeninos atendidos:", str(datos.cantidad_funcionarios_femenino_ap)]
+            ["Ministerio/Institución:", Paragraph(datos.nombre_ministerio_ap,estilo_texto_largo)],
+            ["Cantidad y descripción de actividades:", Paragraph(datos.cantidad_actividades_ap, estilo_texto_largo) if datos.cantidad_actividades_ap else ""],            
+            ["Talleres realizados:", Paragraph(str(datos.cantidad_talleres_ap),estilo_texto_largo)],
+            ["Charlas realizadas:", Paragraph(str(datos.cantidad_charlas_ap),estilo_texto_largo)],
+            ["Jornadas realizadas:", Paragraph(str(datos.cantidad_jornadas_ap),estilo_texto_largo)],
+            ["Forochats realizados:", Paragraph(str(datos.cantidad_forochats_ap),estilo_texto_largo)],
+            ["Funcionarios masculinos atendidos:", Paragraph(str(datos.cantidad_funcionarios_masculino_ap),estilo_texto_largo)],
+            ["Funcionarios femeninos atendidos:", Paragraph(str(datos.cantidad_funcionarios_femenino_ap),estilo_texto_largo)]
         ]
         
-        tabla_funcionarios = Table(atencion_funcionarios, colWidths=[200, 300])
-        tabla_funcionarios.setStyle(TableStyle([
-            ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#f0f0f0')),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
-            ('FONTSIZE', (0,0), (-1,-1), 10),
-            ('PADDING', (0,0), (-1,-1), 5),
-            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('ALIGN', (0,0), (0,-1), 'RIGHT'),
-            ('ALIGN', (1,0), (1,-1), 'LEFT'),
-            ('RIGHTPADDING', (1,1), (1,1), 10),  # Celda de descripción
-            ('LEFTPADDING', (1,1), (1,1), 10),
-        ]))
+        tabla_funcionarios = Table(atencion_funcionarios, 
+                                    colWidths=[FIRST_COL_WIDTH, SECOND_COL_WIDTH],rowHeights=None)
+        tabla_funcionarios.setStyle(estilo_tabla)
         elements.append(tabla_funcionarios)
         elements.append(Spacer(1, 24))
     
