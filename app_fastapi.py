@@ -512,7 +512,7 @@ async def procesar_formulario(
     datos_guardar.save()
     
     # Generar PDF
-    pdf_filename = f"reporte_{datos_guardar.nombre_llenado.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
+    pdf_filename = f"reporte_{datos_guardar.nombre_organismo.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
     generar_pdf(datos_guardar, pdf_filename)
     
     # Enviar por correo
