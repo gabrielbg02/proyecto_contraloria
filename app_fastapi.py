@@ -40,8 +40,8 @@ except ConnectionFailure as e:
 # Configuración de correo (ajusta estos valores)
 SMTP_SERVER = "smtp.gmail.com"  # Cambia según tu proveedor
 SMTP_PORT = 587
-EMAIL_ADDRESS = "gabrielitoborges32@gmail.com"  # Cambia por tu correo
-EMAIL_PASSWORD = "xbbnpneushvueqto"  # Cambia por tu contraseña o app password
+EMAIL_ADDRESS = "cmchreporte@gmail.com"  # Cambia por tu correo
+EMAIL_PASSWORD = "rpwogaiezebbpecn"  # Cambia por tu contraseña o app password
 
 class datos_formulario(Document):
     nombre = StringField()
@@ -53,6 +53,7 @@ class datos_formulario(Document):
     municipio = StringField()
     nombre_organismo = StringField()
     instancia = StringField()
+    mes_reportado = StringField()
     nombre_llenado = StringField()
     correo_llenado = EmailField()
     cargo_llenado = StringField()
@@ -161,13 +162,16 @@ def generar_pdf(datos: datos_formulario, filename: str):
             # Usar la imagen procesada
             img = ImageReader(img_byte_arr)
             canvas.drawImage(img, 40, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
-            canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
+            # canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
         # Texto del encabezado
         canvas.setFont("Helvetica", 18)
         canvas.drawString(200, doc.pagesize[1] - 50, "Contraloría Municipal de Chacao")
         canvas.setFont("Helvetica", 14)
         canvas.drawString(200, doc.pagesize[1] - 70, "Reporte de Formulario OAC")
+        canvas.setFont("Helvetica", 12)
+        canvas.drawString(200, doc.pagesize[1] - 85, "Mes reportado: "  + datos.mes_reportado)
         canvas.setFont("Helvetica", 9)
+
         canvas.drawRightString(doc.pagesize[0] - 50, 30, f"{doc.page}")
     
     def on_later_pages(canvas, doc):
@@ -193,7 +197,7 @@ def generar_pdf(datos: datos_formulario, filename: str):
             # Usar la imagen procesada
             img = ImageReader(img_byte_arr)
             canvas.drawImage(img, 40, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
-            canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
+            # canvas.drawImage(img, doc.pagesize[0] - 120, doc.pagesize[1] - 80, width=80, height=60, preserveAspectRatio=True)
         # Número de página
         canvas.setFont("Helvetica", 9)
         canvas.drawRightString(doc.pagesize[0] - 50, 30, f"{doc.page}")
@@ -207,6 +211,7 @@ def generar_pdf(datos: datos_formulario, filename: str):
     #elements.append(Spacer(1, 12))
     
     # Fecha de generación
+    elements.append(Spacer(1, 12))
     fecha = Paragraph(f"Generado el: {datetime.now().strftime('%d/%m/%Y %H:%M')}", styles["Normal"])
     elements.append(fecha)
     elements.append(Spacer(1, 24))
@@ -410,6 +415,7 @@ async def procesar_formulario(
     municipio: str = Form(...),
     nombre_organismo: str = Form(...),
     instancia: str = Form(...),
+    mes_reportado: str = Form(...),
     nombre_llenado: str = Form(...),
     correo_llenado: str = Form(...),
     cargo_llenado: str = Form(...),
@@ -461,6 +467,7 @@ async def procesar_formulario(
         municipio = municipio,
         nombre_organismo = nombre_organismo,
         instancia = instancia,
+        mes_reportado = mes_reportado,
         nombre_llenado = nombre_llenado,
         correo_llenado = correo_llenado,
         cargo_llenado = cargo_llenado,
@@ -505,7 +512,7 @@ async def procesar_formulario(
     datos_guardar.save()
     
     # Generar PDF
-    pdf_filename = f"reporte_{datos_guardar.nombre_llenado.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
+    pdf_filename = f"reporte_{datos_guardar.nombre_organismo.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
     generar_pdf(datos_guardar, pdf_filename)
     
     # Enviar por correo
